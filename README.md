@@ -1,36 +1,34 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Donato Gómez — Landing
 
-## Getting Started
+Landing personal de desarrollador iOS: Swift 6, SwiftUI, apps nativas para el ecosistema Apple. Next.js (App Router), Tailwind CSS, ES/EN.
 
-First, run the development server:
+## Cómo ejecutar
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abre [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `npm run dev` — desarrollo
+- `npm run build` — build de producción
+- `npm run start` — servir build
+- `npm run lint` — ESLint
 
-## Learn More
+## Contenido y configuración
 
-To learn more about Next.js, take a look at the following resources:
+- **Favicon** — `app/icon.svg` (iniciales DG). Para “Añadir a pantalla de inicio” en iOS puedes añadir `public/apple-touch-icon.png` (180×180).
+- **CV** — El botón de la sección Currículum usa URLs de Google Drive (ES/EN) definidas en `app/page.tsx` (`CV_URL_ES`, `CV_URL_EN`). Para cambiar sin tocar código, puedes usar `NEXT_PUBLIC_CV_URL_ES` y `NEXT_PUBLIC_CV_URL_EN` en `.env.local` si luego enlazas esas variables en el código.
+- **Contacto** — El formulario envía correos con [Resend](https://resend.com). En `.env.local` configura `RESEND_API_KEY`. Opcional: `CONTACT_EMAIL_TO`, `RESEND_FROM_EMAIL`.
+- **Analytics** — Incluye Vercel Analytics. Para quitarlo, elimina `<Analytics />` de `app/layout.tsx`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Despliegue (Vercel)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Despliega en [Vercel](https://vercel.com). Añade las variables de entorno necesarias (p. ej. `RESEND_API_KEY`) en el dashboard.
 
-## Deploy on Vercel
+## Licencia
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+© Donato Gómez. Reservados todos los derechos. Uso privado / personal. Si quieres reutilizar el código como plantilla, puedes indicar una licencia permisiva (p. ej. MIT) en este repositorio y añadir un archivo `LICENSE`.
