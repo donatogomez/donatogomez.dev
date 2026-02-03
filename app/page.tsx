@@ -8,8 +8,6 @@ import { reviews } from "./content/reviews";
 const LINKEDIN_URL = "https://www.linkedin.com/in/donatogomez/";
 const GITHUB_URL = "https://github.com/donatogomez";
 const MEDIUM_URL = "https://medium.com/@donatogomez88";
-const CV_URL_ES = "https://drive.usercontent.google.com/download?id=1c-112FjNmHp7T4VqzuZpWE_YIJz4cbqy&confirm=t";
-const CV_URL_EN = "https://drive.usercontent.google.com/download?id=11nUPXhSV0TpoSf_mnIu9QF2UJXWJjXtY&confirm=t";
 
 type Lang = "es" | "en";
 
@@ -35,6 +33,7 @@ const copy: Record<
     comingSoon: string;
     aboutHeading: string;
     aboutParagraph: string;
+    aboutParagraph2: string;
     footerContactLabel: string;
     contactHeading: string;
     contactNameLabel: string;
@@ -42,7 +41,8 @@ const copy: Record<
     contactMessageLabel: string;
     contactSend: string;
     contactSuccess: string;
-    contactError: string;
+    contactErrorPrefix: string;
+    contactErrorSuffix: string;
     contactRequired: string;
     cvHeading: string;
     cvSubtitle: string;
@@ -55,7 +55,7 @@ const copy: Record<
   es: {
     seniorSwiftDeveloper: "Desarrollador Swift Senior",
     heroTagline:
-      "Swift 6 · SwiftUI · Apps nativas que escalan en el ecosistema Apple",
+      "Apps nativas para el ecosistema Apple · Arquitectura modular · Swift 6 · SwiftUI · Concurrencia estricta · Apps en producción",
     viewApps: "Ver Apps",
     linkedin: "LinkedIn",
     appsHeading: "Apps",
@@ -81,7 +81,9 @@ const copy: Record<
     comingSoon: "Próximamente",
     aboutHeading: "Sobre mí",
     aboutParagraph:
-      "Desarrollador Swift especializado en apps nativas para el ecosistema Apple. Uso Swift 6 y SwiftUI como estándar, arquitectura que escala y buenas prácticas que el mercado exige: código mantenible, tests y entrega continua. Acostumbrado a trabajar con IA en el flujo de desarrollo para ser más productivo sin sacrificar calidad. Si buscas alguien que entregue y mantenga apps en producción, hablemos.",
+      "Desarrollo apps nativas para el ecosistema Apple con un enfoque claro en diseño del software y mantenibilidad. Para mí, escribir código no es solo hacer que algo funcione hoy, sino dejar un sistema que otros puedan entender, extender y evolucionar.",
+    aboutParagraph2:
+      "Trabajo con Swift 6 y SwiftUI aplicando arquitectura modular y concurrencia estricta, buscando sistemas claros, predecibles y fáciles de mantener en el tiempo. Aplico herramientas de automatización e inteligencia artificial para agilizar tareas repetitivas, mientras conservo el control absoluto del criterio técnico, las revisiones manuales y las decisiones estratégicas de diseño y arquitectura.",
     footerContactLabel: "Contacto",
     contactHeading: "Contacto",
     contactNameLabel: "Nombre",
@@ -89,7 +91,8 @@ const copy: Record<
     contactMessageLabel: "Mensaje",
     contactSend: "Enviar",
     contactSuccess: "Mensaje enviado. Te responderé pronto.",
-    contactError: "No se pudo enviar. Intenta de nuevo o escribe a donatogomez.dev@gmail.com",
+    contactErrorPrefix: "No se pudo enviar. Intenta de nuevo",
+    contactErrorSuffix: "o escribe a",
     contactRequired: "Todos los campos son obligatorios.",
     cvHeading: "Currículum",
     cvSubtitle: "PDF en español o inglés según el idioma seleccionado.",
@@ -101,7 +104,7 @@ const copy: Record<
   en: {
     seniorSwiftDeveloper: "Senior Swift Developer",
     heroTagline:
-      "Swift 6 · SwiftUI · Native apps that scale across the Apple ecosystem",
+      "Native apps for the Apple ecosystem · Modular architecture · Swift 6 · SwiftUI · Strict concurrency · Apps in production",
     viewApps: "View Apps",
     linkedin: "LinkedIn",
     appsHeading: "Apps",
@@ -127,7 +130,9 @@ const copy: Record<
     comingSoon: "Coming soon",
     aboutHeading: "About me",
     aboutParagraph:
-      "Swift developer specialised in native apps for the Apple ecosystem. I ship with Swift 6 and SwiftUI as the default, architecture that scales, and the practices the market expects: maintainable code, testing and continuous delivery. I use AI in my daily workflow to move faster without cutting corners. If you need someone who delivers and maintains production apps, let's talk.",
+      "I develop native apps for the Apple ecosystem with a clear focus on software design and maintainability. For me, writing code isn't just about making something work today—it's about leaving a system that others can understand, extend, and evolve.",
+    aboutParagraph2:
+      "I work with Swift 6 and SwiftUI applying modular architecture and strict concurrency, aiming for clear, predictable systems that are easy to maintain over time. I apply automation and artificial intelligence tools to streamline repetitive tasks, while retaining full control over technical judgment, manual reviews, and strategic design and architecture decisions.",
     footerContactLabel: "Contact",
     contactHeading: "Contact",
     contactNameLabel: "Name",
@@ -135,7 +140,8 @@ const copy: Record<
     contactMessageLabel: "Message",
     contactSend: "Send",
     contactSuccess: "Message sent. I'll get back to you soon.",
-    contactError: "Could not send. Try again or email donatogomez.dev@gmail.com",
+    contactErrorPrefix: "Could not send. Try again",
+    contactErrorSuffix: "or email",
     contactRequired: "All fields are required.",
     cvHeading: "Resume",
     cvSubtitle: "PDF in Spanish or English depending on the selected language.",
@@ -155,7 +161,11 @@ export default function Home() {
   const [formError, setFormError] = useState<string | null>(null);
   const [reviewIndex, setReviewIndex] = useState(0);
   const t = copy[lang];
-  const cvUrl = lang === "es" ? CV_URL_ES : CV_URL_EN;
+  const cvUrl =
+    lang === "es"
+      ? (process.env.NEXT_PUBLIC_CV_URL_ES ?? "#")
+      : (process.env.NEXT_PUBLIC_CV_URL_EN ?? "#");
+  const contactEmail = process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "";
 
   useEffect(() => {
     const id = setInterval(() => {
@@ -188,14 +198,16 @@ export default function Home() {
       });
       const json = await res.json().catch(() => ({}));
       if (!res.ok) {
-        setFormError(json.error ?? t.contactError);
+        const fallbackMsg = contactEmail ? `${t.contactErrorPrefix} ${t.contactErrorSuffix} ${contactEmail}` : t.contactErrorPrefix;
+        setFormError(json.error ?? fallbackMsg);
         setFormStatus("error");
         return;
       }
       setFormStatus("success");
       form.reset();
     } catch {
-      setFormError(t.contactError);
+      const fallbackMsg = contactEmail ? `${t.contactErrorPrefix} ${t.contactErrorSuffix} ${contactEmail}` : t.contactErrorPrefix;
+      setFormError(fallbackMsg);
       setFormStatus("error");
     }
   };
@@ -417,9 +429,10 @@ export default function Home() {
           <h2 id="about-heading" className="text-2xl font-semibold tracking-tight text-zinc-900">
             {t.aboutHeading}
           </h2>
-          <p className="mx-auto max-w-prose text-base leading-7 text-zinc-700">
-            {t.aboutParagraph}
-          </p>
+          <div className="mx-auto max-w-prose space-y-4 text-base leading-7 text-zinc-700">
+            <p>{t.aboutParagraph}</p>
+            <p>{t.aboutParagraph2}</p>
+          </div>
         </section>
 
         {/* Apps */}

@@ -1,17 +1,17 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 
-const resendClient = new Resend(process.env.RESEND_API_KEY);
-const TO_EMAIL = process.env.CONTACT_EMAIL_TO ?? "donatogomez.dev@gmail.com";
 const FROM_EMAIL = process.env.RESEND_FROM_EMAIL ?? "onboarding@resend.dev";
 
 export async function POST(request: Request) {
-  if (!process.env.RESEND_API_KEY) {
+  if (!process.env.RESEND_API_KEY || !process.env.CONTACT_EMAIL_TO) {
     return NextResponse.json(
       { error: "Contact form is not configured." },
       { status: 503 }
     );
   }
+  const resendClient = new Resend(process.env.RESEND_API_KEY);
+  const TO_EMAIL = process.env.CONTACT_EMAIL_TO;
 
   try {
     const body = await request.json();

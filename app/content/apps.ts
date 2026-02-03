@@ -16,8 +16,8 @@ export const apps: App[] = [
       en: "Zona Salsa Radio",
     },
     description: {
-      es: "Escucha radio de salsa en directo. Música, programas y la mejor onda latina en tu iPhone.",
-      en: "Listen to salsa radio live. Music, shows and the best Latin vibe on your iPhone.",
+      es: "App iOS para escuchar Zona Salsa Radio en vivo: información en tiempo real de la canción, historial, Lock Screen, Siri, Shortcuts y CarPlay. Streaming 24/7, bilingüe (ES/EN).",
+      en: "iOS app to listen to Zona Salsa Radio live: real-time track info, history, Lock Screen controls, Siri, Shortcuts and CarPlay. 24/7 streaming, bilingual (ES/EN).",
     },
     appStoreUrl: "https://apps.apple.com/app/zona-salsa-radio/id0000000000",
     status: "live",
@@ -29,8 +29,8 @@ export const apps: App[] = [
       en: "Bachata Rhythm",
     },
     description: {
-      es: "Tu compañero de bachata: ritmo, práctica y playlists para bailar y disfrutar.",
-      en: "Your bachata companion: rhythm, practice and playlists to dance and enjoy.",
+      es: "App educativa para explorar y practicar los patrones rítmicos de la bachata. Siete instrumentos, cinco secciones, control de BPM y motor de audio con AVFoundation. SwiftUI, VoiceOver y bilingüe.",
+      en: "Educational app to explore and practice authentic bachata rhythmic patterns. Seven instruments, five sections, BPM control and AVFoundation audio engine. SwiftUI, VoiceOver and bilingual.",
     },
     status: "soon",
   },

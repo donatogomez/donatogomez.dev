@@ -18,16 +18,24 @@ Abre [http://localhost:3000](http://localhost:3000).
 - `npm run start` — servir build
 - `npm run lint` — ESLint
 
+## Variables de entorno (no subas secretos a GitHub)
+
+Copia `.env.example` a `.env.local` y rellena los valores. **Nunca** subas `.env.local` (está en `.gitignore`).
+
+- **RESEND_API_KEY**, **CONTACT_EMAIL_TO** — Obligatorios para el formulario de contacto ([Resend](https://resend.com)). Sin ellos, el formulario devuelve 503.
+- **NEXT_PUBLIC_CONTACT_EMAIL** — Email que se muestra en el mensaje de error del formulario (“escribe a …”).
+- **NEXT_PUBLIC_CV_URL_ES**, **NEXT_PUBLIC_CV_URL_EN** — URLs de descarga directa del CV (p. ej. Google Drive: `https://drive.usercontent.google.com/download?id=FILE_ID&confirm=t`).
+
+El resto de la configuración está en `.env.example`.
+
 ## Contenido y configuración
 
-- **Favicon** — `app/icon.svg` (iniciales DG). Para “Añadir a pantalla de inicio” en iOS puedes añadir `public/apple-touch-icon.png` (180×180).
-- **CV** — El botón de la sección Currículum usa URLs de Google Drive (ES/EN) definidas en `app/page.tsx` (`CV_URL_ES`, `CV_URL_EN`). Para cambiar sin tocar código, puedes usar `NEXT_PUBLIC_CV_URL_ES` y `NEXT_PUBLIC_CV_URL_EN` en `.env.local` si luego enlazas esas variables en el código.
-- **Contacto** — El formulario envía correos con [Resend](https://resend.com). En `.env.local` configura `RESEND_API_KEY`. Opcional: `CONTACT_EMAIL_TO`, `RESEND_FROM_EMAIL`.
-- **Analytics** — Incluye Vercel Analytics. Para quitarlo, elimina `<Analytics />` de `app/layout.tsx`.
+- **Favicon** — `app/icon.svg` (iniciales DG). Opcional: `public/apple-touch-icon.png` (180×180) para “Añadir a pantalla de inicio”.
+- **Analytics** — Vercel Analytics. Para quitarlo, elimina `<Analytics />` de `app/layout.tsx`.
 
 ## Despliegue (Vercel)
 
-Despliega en [Vercel](https://vercel.com). Añade las variables de entorno necesarias (p. ej. `RESEND_API_KEY`) en el dashboard.
+Despliega en [Vercel](https://vercel.com). En el proyecto → Settings → Environment Variables añade las mismas variables que en `.env.example` (sobre todo `RESEND_API_KEY`, `CONTACT_EMAIL_TO`, `NEXT_PUBLIC_CONTACT_EMAIL`, `NEXT_PUBLIC_CV_URL_ES`, `NEXT_PUBLIC_CV_URL_EN`).
 
 ## Licencia
 
