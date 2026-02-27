@@ -19,7 +19,7 @@ export const apps: App[] = [
       es: "App iOS para escuchar Zona Salsa Radio en vivo: información en tiempo real de la canción, historial, Lock Screen, Siri, Shortcuts y CarPlay. Streaming 24/7, bilingüe (ES/EN).",
       en: "iOS app to listen to Zona Salsa Radio live: real-time track info, history, Lock Screen controls, Siri, Shortcuts and CarPlay. 24/7 streaming, bilingual (ES/EN).",
     },
-    appStoreUrl: "https://apps.apple.com/app/zona-salsa-radio/id0000000000",
+    appStoreUrl: "https://apps.apple.com/us/app/zona-salsa-radio/id6759666915",
     status: "live",
   },
   {
