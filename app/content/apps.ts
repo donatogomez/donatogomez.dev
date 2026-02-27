@@ -6,6 +6,8 @@ export type App = {
   description: { es: string; en: string };
   appStoreUrl?: string;
   status: AppStatus;
+  /** Ruta del icono/logo en public (ej. /zona-salsa-radio.png). Opcional. */
+  icon?: string;
 };
 
 export const apps: App[] = [
@@ -21,6 +23,7 @@ export const apps: App[] = [
     },
     appStoreUrl: "https://apps.apple.com/us/app/zona-salsa-radio/id6759666915",
     status: "live",
+    icon: "/zona-salsa-radio.png",
   },
   {
     id: "bachata-rhythm",

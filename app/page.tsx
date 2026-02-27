@@ -451,7 +451,17 @@ export default function Home() {
                   <div
                     className="mb-4 aspect-square w-16 overflow-hidden rounded-2xl bg-zinc-200"
                     aria-hidden
-                  />
+                  >
+                    {app.icon ? (
+                      <Image
+                        src={app.icon}
+                        alt=""
+                        width={64}
+                        height={64}
+                        className="h-full w-full object-cover"
+                      />
+                    ) : null}
+                  </div>
                   <h3 className="text-lg font-medium text-zinc-900">
                     {app.name[lang]}
                   </h3>
