@@ -354,18 +354,15 @@ export default function Home() {
         <section className="relative flex flex-col gap-8 overflow-hidden rounded-3xl bg-zinc-50 px-6 pt-10 pb-12 sm:px-8 sm:pb-14" aria-labelledby="hero-heading">
           <div className="flex flex-col gap-8 sm:flex-row sm:items-start sm:gap-10">
             <div className="flex justify-center sm:justify-start">
-              <div className="relative h-32 w-32 shrink-0 sm:h-36 sm:w-36">
-                <div className="avatar-ring" aria-hidden />
-                <div className="absolute inset-[4px] overflow-hidden rounded-full bg-white">
-                  <Image
-                    src="/avatar.png"
-                    alt="Donato Gómez"
-                    width={144}
-                    height={144}
-                    className="h-full w-full object-cover"
-                    priority
-                  />
-                </div>
+              <div className="group transition-transform duration-500 ease-out hover:scale-[1.03]">
+                <Image
+                  src="/avatar.png"
+                  alt="Donato Gómez"
+                  width={144}
+                  height={144}
+                  className="h-32 w-32 object-contain sm:h-36 sm:w-36"
+                  priority
+                />
               </div>
             </div>
             <div className="min-w-0 flex-1 space-y-6 text-center sm:text-left">
@@ -373,7 +370,7 @@ export default function Home() {
                 Donato Gómez
               </h1>
               <p className="flex justify-center sm:justify-start">
-                <span className="inline-flex items-center gap-2 rounded-full bg-accent px-4 py-1.5 text-sm font-semibold text-white">
+                <span className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-sm font-semibold text-white" style={{ backgroundColor: '#F05138' }}>
                   <Image src="/swift-logo.png" alt="" width={16} height={16} className="h-4 w-4 shrink-0 object-contain" aria-hidden />
                   {t.seniorSwiftDeveloper}
                 </span>
@@ -433,7 +430,7 @@ export default function Home() {
             <h2 id="about-heading" className="text-3xl font-bold tracking-tight text-zinc-900">
               {t.aboutHeading}
             </h2>
-            <div className="mx-auto h-1 w-10 rounded-full bg-accent" aria-hidden />
+            <div className="mx-auto h-1 w-10 rounded-full bg-[#F05138]" aria-hidden />
           </div>
           <div className="mx-auto max-w-prose space-y-5 text-base leading-8 text-zinc-600 sm:text-lg sm:leading-9">
             <p>{t.aboutParagraph}</p>
@@ -451,7 +448,7 @@ export default function Home() {
             <h2 id="apps-heading" className="text-3xl font-bold tracking-tight text-zinc-900">
               {t.appsHeading}
             </h2>
-            <div className="mx-auto h-1 w-10 rounded-full bg-accent" aria-hidden />
+            <div className="mx-auto h-1 w-10 rounded-full bg-[#F05138]" aria-hidden />
           </div>
           <ul className="grid gap-8 text-left sm:grid-cols-2 lg:grid-cols-3">
             {apps.map((app) => (
@@ -490,7 +487,7 @@ export default function Home() {
                       href={app.appStoreUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="mt-4 inline-flex h-10 w-full items-center justify-center rounded-lg bg-zinc-900 text-sm font-medium text-white transition-colors hover:bg-accent focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2"
+                      className="mt-4 inline-flex h-10 w-full items-center justify-center rounded-lg bg-zinc-900 text-sm font-medium text-white transition-colors hover:bg-[#F05138] focus:outline-none focus:ring-2 focus:ring-[#F05138] focus:ring-offset-2"
                     >
                       {t.appStore}
                     </a>
@@ -511,7 +508,7 @@ export default function Home() {
             <h2 id="reviews-heading" className="text-3xl font-bold tracking-tight text-zinc-900">
               {t.reviewsHeading}
             </h2>
-            <div className="mx-auto h-1 w-10 rounded-full bg-accent" aria-hidden />
+            <div className="mx-auto h-1 w-10 rounded-full bg-[#F05138]" aria-hidden />
           </div>
           <div className="overflow-hidden rounded-2xl border border-zinc-200 bg-zinc-50/50 p-6 text-left sm:p-8">
             <blockquote className="min-h-[120px] sm:min-h-[100px]">
@@ -533,7 +530,7 @@ export default function Home() {
                     type="button"
                     onClick={() => setReviewIndex(i)}
                       className={`h-2 rounded-full transition-all ${
-                      i === reviewIndex ? "w-6 bg-accent" : "w-2 bg-zinc-300 hover:bg-zinc-400"
+                      i === reviewIndex ? "w-6 bg-[#F05138]" : "w-2 bg-zinc-300 hover:bg-zinc-400"
                     }`}
                     aria-current={i === reviewIndex ? "true" : undefined}
                     aria-label={`Reseña ${i + 1}`}
@@ -576,7 +573,7 @@ export default function Home() {
             <h2 id="highlights-heading" className="text-3xl font-bold tracking-tight text-zinc-900">
               {t.highlightsHeading}
             </h2>
-            <div className="mx-auto h-1 w-10 rounded-full bg-accent" aria-hidden />
+            <div className="mx-auto h-1 w-10 rounded-full bg-[#F05138]" aria-hidden />
           </div>
           <ul className="grid gap-4 text-left sm:grid-cols-2">
             {[
@@ -632,7 +629,7 @@ export default function Home() {
             <h2 id="cv-heading" className="text-3xl font-bold tracking-tight text-zinc-900">
               {t.cvHeading}
             </h2>
-            <div className="mx-auto h-1 w-10 rounded-full bg-accent" aria-hidden />
+            <div className="mx-auto h-1 w-10 rounded-full bg-[#F05138]" aria-hidden />
           </div>
           <div className="mx-auto max-w-md overflow-hidden rounded-2xl border border-zinc-200 bg-gradient-to-b from-zinc-50 to-white p-8 shadow-sm ring-1 ring-zinc-200/50 transition-shadow hover:shadow-md">
             <div className="flex flex-col items-center text-center">
@@ -648,7 +645,7 @@ export default function Home() {
                 href={cvUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-6 inline-flex h-12 min-w-[220px] items-center justify-center gap-2 rounded-xl border-2 border-zinc-900 bg-zinc-900 px-6 text-base font-medium text-white transition-colors hover:border-accent hover:bg-accent focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2"
+                className="mt-6 inline-flex h-12 min-w-[220px] items-center justify-center gap-2 rounded-xl border-2 border-zinc-900 bg-zinc-900 px-6 text-base font-medium text-white transition-colors hover:border-[#F05138] hover:bg-[#F05138] focus:outline-none focus:ring-2 focus:ring-[#F05138] focus:ring-offset-2"
               >
                 <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
@@ -669,7 +666,7 @@ export default function Home() {
             <h2 id="contact-heading" className="text-3xl font-bold tracking-tight text-zinc-900">
               {t.contactHeading}
             </h2>
-            <div className="mx-auto h-1 w-10 rounded-full bg-accent" aria-hidden />
+            <div className="mx-auto h-1 w-10 rounded-full bg-[#F05138]" aria-hidden />
           </div>
           {formStatus === "success" ? (
             <p className="rounded-lg bg-zinc-100 px-4 py-3 text-sm text-zinc-700">
@@ -687,7 +684,7 @@ export default function Home() {
                   type="text"
                   required
                   disabled={formStatus === "loading"}
-                  className="w-full rounded-lg border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-900 placeholder-zinc-400 focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent disabled:opacity-60"
+                  className="w-full rounded-lg border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-900 placeholder-zinc-400 focus:border-[#F05138] focus:outline-none focus:ring-1 focus:ring-[#F05138] disabled:opacity-60"
                   placeholder={t.contactNameLabel}
                 />
               </div>
@@ -701,7 +698,7 @@ export default function Home() {
                   type="email"
                   required
                   disabled={formStatus === "loading"}
-                  className="w-full rounded-lg border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-900 placeholder-zinc-400 focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent disabled:opacity-60"
+                  className="w-full rounded-lg border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-900 placeholder-zinc-400 focus:border-[#F05138] focus:outline-none focus:ring-1 focus:ring-[#F05138] disabled:opacity-60"
                   placeholder={t.contactEmailLabel}
                 />
               </div>
@@ -715,7 +712,7 @@ export default function Home() {
                   rows={4}
                   required
                   disabled={formStatus === "loading"}
-                  className="w-full resize-y rounded-lg border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-900 placeholder-zinc-400 focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent disabled:opacity-60"
+                  className="w-full resize-y rounded-lg border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-900 placeholder-zinc-400 focus:border-[#F05138] focus:outline-none focus:ring-1 focus:ring-[#F05138] disabled:opacity-60"
                   placeholder={t.contactMessageLabel}
                 />
               </div>
@@ -728,7 +725,7 @@ export default function Home() {
                 <button
                   type="submit"
                   disabled={formStatus === "loading"}
-                  className="inline-flex h-14 min-w-[180px] items-center justify-center rounded-full bg-zinc-900 px-8 text-base font-medium text-white transition-colors hover:bg-accent focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 disabled:opacity-60"
+                  className="inline-flex h-14 min-w-[180px] items-center justify-center rounded-full bg-zinc-900 px-8 text-base font-medium text-white transition-colors hover:bg-[#F05138] focus:outline-none focus:ring-2 focus:ring-[#F05138] focus:ring-offset-2 disabled:opacity-60"
                 >
                   {formStatus === "loading" ? "…" : t.contactSend}
                 </button>
