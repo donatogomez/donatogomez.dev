@@ -346,12 +346,12 @@ export default function Home() {
         <section className="relative flex flex-col gap-8 overflow-hidden rounded-3xl bg-zinc-50 px-6 pt-10 pb-12 sm:px-8 sm:pb-14" aria-labelledby="hero-heading">
           <div className="flex flex-col gap-8 sm:flex-row sm:items-start sm:gap-10">
             <div className="flex justify-center sm:justify-start">
-              <div className="group transition-transform duration-500 ease-out hover:scale-[1.03]">
+              <div className="group transform-gpu cursor-default transition-transform duration-500 ease-out hover:scale-110">
                 <Image
                   src="/avatar.png"
                   alt="Donato Gómez"
-                  width={192}
-                  height={192}
+                  width={384}
+                  height={384}
                   className="h-40 w-40 object-contain sm:h-48 sm:w-48"
                   priority
                 />
@@ -363,9 +363,7 @@ export default function Home() {
               </h1>
               <p className="flex justify-center sm:justify-start">
                 <span className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-sm font-semibold text-white" style={{ backgroundColor: '#F05138' }}>
-                  <svg className="h-4 w-4 shrink-0" viewBox="0 0 100 100" fill="white" aria-hidden>
-                    <path d="M84.6 61.4c.4-1 .7-2 .9-3-4.5 4.8-10.4 7.2-17.5 7.2-5.4 0-10.1-1.6-14.1-4.8-3.9-3.2-6.4-7.4-7.5-12.6 7.8 7 16.4 8.9 25.6 5.7-7.2-4.8-13.1-11.7-17.5-20.7-3.5-7.1-5-14.3-4.5-21.6-4.7 4.2-8.1 9.4-10.2 15.6-2.1 6.2-2.4 12.5-.9 18.9-4-3.7-6.8-8.3-8.4-13.8-1.3-4.5-1.6-9-1-13.6C22 26.6 17.5 36 17.5 46.5c0 9.4 3.3 17.5 9.9 24.1 6.6 6.6 14.7 9.9 24.1 9.9 1.3 0 2.5-.1 3.8-.2 4.9 3.4 10.5 5.1 16.8 5.1 5.7 0 10.8-1.5 15.3-4.5 4.5-3 7.7-7 9.7-12.1-3.5 1.8-7.3 2.7-11.5 2.7-2.2-.1-4.2-.5-6-.9 2.1-2.5 3.8-5.4 5-9.2z"/>
-                  </svg>
+                  <Image src="/swift-logo.png" alt="" width={16} height={16} className="h-4 w-4 shrink-0 object-contain" aria-hidden />
                   {t.seniorSwiftDeveloper}
                 </span>
               </p>
