@@ -1,9 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import { apps } from "./content/apps";
-import { reviews } from "./content/reviews";
 
 const LINKEDIN_URL = "https://www.linkedin.com/in/donatogomez/";
 const GITHUB_URL = "https://github.com/donatogomez";
@@ -159,7 +158,6 @@ export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [formStatus, setFormStatus] = useState<FormStatus>("idle");
   const [formError, setFormError] = useState<string | null>(null);
-  const [reviewIndex, setReviewIndex] = useState(0);
   const t = copy[lang];
   const cvUrl =
     lang === "es"
@@ -167,12 +165,6 @@ export default function Home() {
       : (process.env.NEXT_PUBLIC_CV_URL_EN ?? "#");
   const contactEmail = process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "";
 
-  useEffect(() => {
-    const id = setInterval(() => {
-      setReviewIndex((i) => (i + 1) % reviews.length);
-    }, 5000);
-    return () => clearInterval(id);
-  }, []);
 
   const closeMenu = () => setMenuOpen(false);
 
@@ -371,7 +363,7 @@ export default function Home() {
               </h1>
               <p className="flex justify-center sm:justify-start">
                 <span className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-sm font-semibold text-white" style={{ backgroundColor: '#F05138' }}>
-                  <Image src="/swift-logo.png" alt="" width={16} height={16} className="h-4 w-4 shrink-0 object-contain brightness-0 invert" aria-hidden />
+                  <Image src="/swift-logo.png" alt="" width={16} height={16} className="h-4 w-4 shrink-0 object-contain" aria-hidden />
                   {t.seniorSwiftDeveloper}
                 </span>
               </p>
@@ -496,71 +488,6 @@ export default function Home() {
               </li>
             ))}
           </ul>
-        </section>
-
-        {/* Reviews carousel (antes que Destacados) */}
-        <section
-          id="reviews"
-          className="scroll-mt-16 space-y-6 pb-20 sm:pb-28"
-          aria-labelledby="reviews-heading"
-        >
-          <div className="space-y-2">
-            <h2 id="reviews-heading" className="text-3xl font-bold tracking-tight text-zinc-900">
-              {t.reviewsHeading}
-            </h2>
-            <div className="mx-auto h-1 w-10 rounded-full bg-[#F05138]" aria-hidden />
-          </div>
-          <div className="overflow-hidden rounded-2xl border border-zinc-200 bg-zinc-50/50 p-6 text-left sm:p-8">
-            <blockquote className="min-h-[120px] sm:min-h-[100px]">
-              <p className="text-base leading-7 text-zinc-700 sm:text-lg">
-                "{reviews[reviewIndex].text[lang]}"
-              </p>
-              <footer className="mt-4 flex flex-wrap items-baseline gap-x-2 gap-y-1">
-                <cite className="not-italic font-medium text-zinc-900">
-                  {reviews[reviewIndex].name}
-                </cite>
-                <span className="text-sm text-zinc-500">— {reviews[reviewIndex].role}</span>
-              </footer>
-            </blockquote>
-            <div className="mt-6 flex items-center justify-between gap-4">
-              <div className="flex gap-1.5" aria-label="Reseña actual">
-                {reviews.map((_, i) => (
-                  <button
-                    key={i}
-                    type="button"
-                    onClick={() => setReviewIndex(i)}
-                      className={`h-2 rounded-full transition-all ${
-                      i === reviewIndex ? "w-6 bg-[#F05138]" : "w-2 bg-zinc-300 hover:bg-zinc-400"
-                    }`}
-                    aria-current={i === reviewIndex ? "true" : undefined}
-                    aria-label={`Reseña ${i + 1}`}
-                  />
-                ))}
-              </div>
-              <div className="flex gap-2">
-                <button
-                  type="button"
-                  onClick={() => setReviewIndex((i) => (i - 1 + reviews.length) % reviews.length)}
-                  className="flex h-9 w-9 items-center justify-center rounded-full border border-zinc-200 text-zinc-700 transition-colors hover:bg-zinc-100 hover:text-zinc-900"
-                  aria-label="Reseña anterior"
-                >
-                  <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                  </svg>
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setReviewIndex((i) => (i + 1) % reviews.length)}
-                  className="flex h-9 w-9 items-center justify-center rounded-full border border-zinc-200 text-zinc-700 transition-colors hover:bg-zinc-100 hover:text-zinc-900"
-                  aria-label="Siguiente reseña"
-                >
-                  <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </button>
-              </div>
-            </div>
-          </div>
         </section>
 
         {/* Highlights (sin enlace en menú) */}
@@ -779,6 +706,11 @@ export default function Home() {
               {t.medium}
             </a>
           </nav>
+          <div className="mt-8 text-center text-xs text-zinc-400">
+            <a href="/privacy" className="underline underline-offset-4 hover:text-zinc-600">
+              {lang === "es" ? "Política de privacidad" : "Privacy Policy"}
+            </a>
+          </div>
         </div>
       </footer>
     </div>
