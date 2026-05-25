@@ -363,7 +363,7 @@ export default function Home() {
               </h1>
               <p className="flex justify-center sm:justify-start">
                 <span className="inline-flex items-center gap-2 whitespace-nowrap rounded-full px-4 py-1.5 text-sm font-semibold text-white" style={{ backgroundColor: '#F05138' }}>
-                  <Image src="/swift-logo.png" alt="" width={16} height={16} className="h-4 w-4 shrink-0 object-contain brightness-0 invert" aria-hidden />
+                  <Image src="/swift-logo.png" alt="" width={20} height={20} className="h-5 w-5 shrink-0 object-contain" aria-hidden />
                   {t.seniorSwiftDeveloper}
                 </span>
               </p>
