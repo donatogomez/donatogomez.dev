@@ -3,13 +3,14 @@
 :root {
   --background: #ffffff;
   --foreground: #18181b;
+  --accent: #f05138;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-accent: var(--accent);
+  --font-sans: var(--font-space-grotesk);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -26,5 +27,29 @@ html {
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-space-grotesk), system-ui, sans-serif;
+}
+
+/* Avatar — rotating gradient ring */
+.avatar-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 0deg,
+    #f05138 0%,
+    #ff7043 18%,
+    #ffcc80 38%,
+    #fafafa 50%,
+    #ffcc80 62%,
+    #ff7043 82%,
+    #f05138 100%
+  );
+  animation: avatar-ring-spin 6s linear infinite;
+}
+
+@keyframes avatar-ring-spin {
+  to {
+    transform: rotate(360deg);
+  }
 }

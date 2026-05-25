@@ -14,12 +14,12 @@ export const apps: App[] = [
   {
     id: "zona-salsa-radio",
     name: {
-      es: "Zona Salsa Radio",
-      en: "Zona Salsa Radio",
+      es: "ZonaSalsa",
+      en: "ZonaSalsa",
     },
     description: {
-      es: "App iOS para escuchar Zona Salsa Radio en vivo: información en tiempo real de la canción, historial, Lock Screen, Siri, Shortcuts y CarPlay. Streaming 24/7, bilingüe (ES/EN).",
-      en: "iOS app to listen to Zona Salsa Radio live: real-time track info, history, Lock Screen controls, Siri, Shortcuts and CarPlay. 24/7 streaming, bilingual (ES/EN).",
+      es: "Streaming de salsa en vivo, 24/7 y sin publicidad. Información en tiempo real, historial de canciones, Lock Screen, Control Center, CarPlay y tema oscuro. Sin suscripción, sin anuncios.",
+      en: "Live salsa streaming, 24/7 and ad-free. Real-time now playing, song history, Lock Screen, Control Center, CarPlay and dark mode. No subscription, no ads.",
     },
     appStoreUrl: "https://apps.apple.com/us/app/zona-salsa-radio/id6759666915",
     status: "live",
