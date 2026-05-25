@@ -23,7 +23,7 @@ export const apps: App[] = [
     },
     appStoreUrl: "https://apps.apple.com/us/app/zona-salsa-radio/id6759666915",
     status: "live",
-    icon: "/zona-salsa-radio.png",
+    icon: "/zonasalsa-logo.webp",
   },
   {
     id: "bachata-rhythm",
