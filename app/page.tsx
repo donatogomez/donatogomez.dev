@@ -235,12 +235,6 @@ export default function Home() {
               {t.appsHeading}
             </a>
             <a
-              href="#cv"
-              className="text-sm text-zinc-700 underline-offset-4 transition-colors hover:text-zinc-900 hover:underline"
-            >
-              {t.cvNavLabel}
-            </a>
-            <a
               href="#contact"
               className="text-sm text-zinc-700 underline-offset-4 transition-colors hover:text-zinc-900 hover:underline"
             >
@@ -309,9 +303,6 @@ export default function Home() {
               </a>
               <a href="#apps" className="py-2 text-sm text-zinc-700 hover:text-zinc-900" onClick={closeMenu}>
                 {t.appsHeading}
-              </a>
-              <a href="#cv" className="py-2 text-sm text-zinc-700 hover:text-zinc-900" onClick={closeMenu}>
-                {t.cvNavLabel}
               </a>
               <a href="#contact" className="py-2 text-sm text-zinc-700 hover:text-zinc-900" onClick={closeMenu}>
                 {t.contactHeading}
@@ -424,6 +415,29 @@ export default function Home() {
           <div className="mx-auto max-w-prose space-y-5 text-base leading-8 text-zinc-600 sm:text-lg sm:leading-9">
             <p>{t.aboutParagraph}</p>
             <p>{t.aboutParagraph2}</p>
+          </div>
+          <div className="mx-auto max-w-md overflow-hidden rounded-2xl border border-zinc-200 bg-gradient-to-b from-zinc-50 to-white p-8 shadow-sm ring-1 ring-zinc-200/50 transition-shadow hover:shadow-md">
+            <div className="flex flex-col items-center text-center">
+              <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-xl bg-zinc-900 text-white" aria-hidden>
+                <svg className="h-7 w-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+              </div>
+              <p className="text-sm text-zinc-600">
+                {t.cvSubtitle}
+              </p>
+              <a
+                href={cvUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-6 inline-flex h-12 min-w-[220px] items-center justify-center gap-2 rounded-xl border-2 border-zinc-900 bg-zinc-900 px-6 text-base font-medium text-white transition-colors hover:border-[#F05138] hover:bg-[#F05138] focus:outline-none focus:ring-2 focus:ring-[#F05138] focus:ring-offset-2"
+              >
+                <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                </svg>
+                {t.cvDownload}
+              </a>
+            </div>
           </div>
         </section>
 
@@ -541,43 +555,6 @@ export default function Home() {
               </li>
             ))}
           </ul>
-        </section>
-
-        {/* CV */}
-        <section
-          id="cv"
-          className="scroll-mt-16 space-y-6 pb-20 sm:pb-28"
-          aria-labelledby="cv-heading"
-        >
-          <div className="space-y-2">
-            <h2 id="cv-heading" className="text-3xl font-bold tracking-tight text-zinc-900">
-              {t.cvHeading}
-            </h2>
-            <div className="mx-auto h-1 w-10 rounded-full bg-[#F05138]" aria-hidden />
-          </div>
-          <div className="mx-auto max-w-md overflow-hidden rounded-2xl border border-zinc-200 bg-gradient-to-b from-zinc-50 to-white p-8 shadow-sm ring-1 ring-zinc-200/50 transition-shadow hover:shadow-md">
-            <div className="flex flex-col items-center text-center">
-              <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-xl bg-zinc-900 text-white" aria-hidden>
-                <svg className="h-7 w-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                </svg>
-              </div>
-              <p className="text-sm text-zinc-600">
-                {t.cvSubtitle}
-              </p>
-              <a
-                href={cvUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-6 inline-flex h-12 min-w-[220px] items-center justify-center gap-2 rounded-xl border-2 border-zinc-900 bg-zinc-900 px-6 text-base font-medium text-white transition-colors hover:border-[#F05138] hover:bg-[#F05138] focus:outline-none focus:ring-2 focus:ring-[#F05138] focus:ring-offset-2"
-              >
-                <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                </svg>
-                {t.cvDownload}
-              </a>
-            </div>
-          </div>
         </section>
 
         {/* Contact */}
