@@ -349,15 +349,14 @@ export default function Home() {
               </div>
             </div>
             <div className="min-w-0 flex-1 space-y-6 text-center sm:text-left">
-              <h1 id="hero-heading" className="font-bold tracking-tighter text-zinc-900" style={{ fontSize: 'clamp(2rem, 3.5vw, 3.25rem)' }}>
-                Donato Gómez
-              </h1>
-              <p className="flex justify-center sm:justify-start">
-                <span className="inline-flex items-center gap-2 whitespace-nowrap rounded-full px-4 py-1.5 text-sm font-semibold text-white" style={{ backgroundColor: '#F05138' }}>
-                  <Image src="/swift-logo.png" alt="" width={20} height={20} className="h-5 w-5 shrink-0 object-contain" aria-hidden />
+              <div className="space-y-1">
+                <h1 id="hero-heading" className="font-bold tracking-tighter text-zinc-900" style={{ fontSize: 'clamp(2rem, 3.5vw, 3.25rem)' }}>
+                  Donato Gómez
+                </h1>
+                <p className="text-sm text-zinc-500 sm:text-base">
                   {t.seniorSwiftDeveloper}
-                </span>
-              </p>
+                </p>
+              </div>
               <p className="mx-auto max-w-xl text-sm leading-relaxed text-zinc-500 sm:mx-0 sm:text-base">
                 {t.heroTagline}
               </p>
