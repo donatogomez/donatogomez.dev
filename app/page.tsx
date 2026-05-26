@@ -415,28 +415,19 @@ export default function Home() {
             <p>{t.aboutParagraph}</p>
             <p>{t.aboutParagraph2}</p>
           </div>
-          <div className="overflow-hidden rounded-2xl border border-zinc-200 bg-gradient-to-b from-zinc-50 to-white p-6 shadow-sm ring-1 ring-zinc-200/50 transition-shadow hover:shadow-md sm:p-8">
-            <div className="flex flex-col items-center gap-4 sm:flex-row sm:items-center sm:justify-between">
-              <div className="flex items-center gap-4">
-                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-zinc-900 text-white" aria-hidden>
-                  <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                  </svg>
-                </div>
-                <p className="text-sm text-zinc-600">{t.cvSubtitle}</p>
-              </div>
-              <a
-                href={cvUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-xl border-2 border-zinc-900 bg-zinc-900 px-6 text-sm font-medium text-white transition-colors hover:border-[#F05138] hover:bg-[#F05138] focus:outline-none focus:ring-2 focus:ring-[#F05138] focus:ring-offset-2 sm:w-auto"
-              >
-                <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                </svg>
-                {t.cvDownload}
-              </a>
-            </div>
+          <div className="mx-auto max-w-prose border-t border-zinc-200 pt-8">
+            <p className="text-sm text-zinc-500">{t.cvSubtitle}</p>
+            <a
+              href={cvUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-4 inline-flex items-center gap-2 text-base font-medium text-zinc-900 underline decoration-zinc-300 underline-offset-4 transition-colors hover:text-[#F05138] hover:decoration-[#F05138] focus:outline-none focus:ring-2 focus:ring-[#F05138] focus:ring-offset-2 rounded-sm"
+            >
+              <svg className="h-5 w-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+              </svg>
+              {t.cvDownload}
+            </a>
           </div>
         </section>
 
@@ -456,20 +447,20 @@ export default function Home() {
             {apps.map((app) => (
               <li key={app.id}>
                 <article className="flex flex-col rounded-2xl border border-zinc-200 bg-zinc-50/50 p-6 shadow-sm transition-colors hover:border-zinc-300 hover:shadow-md">
-                  <div
-                    className="mb-4 aspect-square w-16 overflow-hidden rounded-2xl bg-zinc-200"
-                    aria-hidden
-                  >
-                    {app.icon ? (
-                      <Image
-                        src={app.icon}
-                        alt=""
-                        width={64}
-                        height={64}
-                        className="h-full w-full object-cover"
-                      />
-                    ) : null}
-                  </div>
+                  {app.icon ? (
+                    <Image
+                      src={app.icon}
+                      alt=""
+                      width={64}
+                      height={64}
+                      className="mb-4 h-16 w-16 rounded-[22%] object-contain"
+                    />
+                  ) : (
+                    <div
+                      className="mb-4 h-16 w-16 rounded-[22%] bg-zinc-100"
+                      aria-hidden
+                    />
+                  )}
                   <h3 className="text-lg font-medium text-zinc-900">
                     {app.name[lang]}
                   </h3>
