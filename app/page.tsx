@@ -353,7 +353,7 @@ export default function Home() {
                 <h1 id="hero-heading" className="font-bold tracking-tighter text-zinc-900" style={{ fontSize: 'clamp(2rem, 3.5vw, 3.25rem)' }}>
                   Donato Gómez
                 </h1>
-                <p className="text-sm text-zinc-500 sm:text-base">
+                <p className="text-sm font-medium text-zinc-700 sm:text-base">
                   {t.seniorSwiftDeveloper}
                 </p>
               </div>
