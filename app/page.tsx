@@ -385,18 +385,6 @@ export default function Home() {
               {t.linkedin}
             </a>
             <a
-              href={cvUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex h-11 items-center justify-center gap-2 rounded-full px-5 text-sm font-semibold text-white transition-opacity hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-[#F05138] focus:ring-offset-2"
-              style={{ backgroundColor: '#F05138' }}
-            >
-              <svg className="h-4 w-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-              </svg>
-              {t.cvDownload}
-            </a>
-            <a
               href={GITHUB_URL}
               target="_blank"
               rel="noopener noreferrer"
