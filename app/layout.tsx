@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Space_Grotesk } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
+import { PersonJsonLd } from "./components/person-json-ld";
+import { seoCopy, siteName, siteUrl } from "./lib/site";
 import "./globals.css";
 
 const spaceGrotesk = Space_Grotesk({
@@ -9,11 +11,7 @@ const spaceGrotesk = Space_Grotesk({
   weight: ["300", "400", "500", "600", "700"],
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://donatogomez.dev";
-
-const title = "Donato Gómez · Swift 6 & SwiftUI · Native Apple Apps";
-const description =
-  "Swift developer specialised in native apps for the Apple ecosystem. Swift 6, SwiftUI, Clean Architecture. Ships production apps that scale.";
+const { title, description } = seoCopy.en;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -21,13 +19,18 @@ export const metadata: Metadata = {
   description,
   alternates: {
     canonical: "/",
+    languages: {
+      "es-ES": "/",
+      "en-US": "/?lang=en",
+      "x-default": "/",
+    },
   },
   openGraph: {
     type: "website",
     locale: "es_ES",
     alternateLocale: "en_US",
     url: siteUrl,
-    siteName: "Donato Gómez",
+    siteName,
     title,
     description,
     images: [
@@ -35,7 +38,7 @@ export const metadata: Metadata = {
         url: "/avatar.png",
         width: 1200,
         height: 1200,
-        alt: "Donato Gómez",
+        alt: siteName,
       },
     ],
   },
@@ -45,7 +48,7 @@ export const metadata: Metadata = {
     description,
     images: ["/avatar.png"],
   },
-  // Favicon: app/icon.svg (iniciales DG en fondo oscuro)
+  // Favicon: app/icon.svg · Añadir a inicio: app/apple-icon.png (desde avatar)
 };
 
 export default function RootLayout({
@@ -54,10 +57,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${spaceGrotesk.variable} antialiased`}
-      >
+    <html lang="es" suppressHydrationWarning>
+      <body className={`${spaceGrotesk.variable} antialiased`}>
+        <PersonJsonLd />
         {children}
         <Analytics />
       </body>

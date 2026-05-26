@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import Image from "next/image";
+import { useSearchParams } from "next/navigation";
 import { apps } from "./content/apps";
 
 const LINKEDIN_URL = "https://www.linkedin.com/in/donatogomez/";
@@ -153,8 +154,13 @@ const copy: Record<
 
 type FormStatus = "idle" | "loading" | "success" | "error";
 
-export default function Home() {
-  const [lang, setLang] = useState<Lang>("es");
+function langFromSearchParams(searchParams: URLSearchParams): Lang {
+  return searchParams.get("lang") === "en" ? "en" : "es";
+}
+
+function HomeContent() {
+  const searchParams = useSearchParams();
+  const [lang, setLang] = useState<Lang>(() => langFromSearchParams(searchParams));
   const [menuOpen, setMenuOpen] = useState(false);
   const [formStatus, setFormStatus] = useState<FormStatus>("idle");
   const [formError, setFormError] = useState<string | null>(null);
@@ -165,6 +171,26 @@ export default function Home() {
       : (process.env.NEXT_PUBLIC_CV_URL_EN ?? "#");
   const contactEmail = process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "";
 
+  useEffect(() => {
+    document.documentElement.lang = lang === "es" ? "es" : "en";
+  }, [lang]);
+
+  useEffect(() => {
+    const next = langFromSearchParams(searchParams);
+    setLang((current) => (current === next ? current : next));
+  }, [searchParams]);
+
+  const setLangWithUrl = (next: Lang) => {
+    setLang(next);
+    const url = new URL(window.location.href);
+    if (next === "en") {
+      url.searchParams.set("lang", "en");
+    } else {
+      url.searchParams.delete("lang");
+    }
+    const qs = url.searchParams.toString();
+    window.history.replaceState(null, "", qs ? `${url.pathname}?${qs}` : url.pathname);
+  };
 
   const closeMenu = () => setMenuOpen(false);
 
@@ -243,7 +269,7 @@ export default function Home() {
             <nav className="ml-1 flex rounded-full border border-zinc-200 bg-zinc-50/80 p-0.5 text-sm" aria-label="Idioma / Language">
               <button
                 type="button"
-                onClick={() => setLang("es")}
+                onClick={() => setLangWithUrl("es")}
                 className={`rounded-full px-2.5 py-1 font-medium transition-colors ${
                   lang === "es"
                     ? "bg-zinc-900 text-white"
@@ -256,7 +282,7 @@ export default function Home() {
               </button>
               <button
                 type="button"
-                onClick={() => setLang("en")}
+                onClick={() => setLangWithUrl("en")}
                 className={`rounded-full px-2.5 py-1 font-medium transition-colors ${
                   lang === "en"
                     ? "bg-zinc-900 text-white"
@@ -311,7 +337,7 @@ export default function Home() {
                 <span className="py-2 text-xs text-zinc-500">Idioma</span>
                 <button
                   type="button"
-                  onClick={() => { setLang("es"); closeMenu(); }}
+                  onClick={() => { setLangWithUrl("es"); closeMenu(); }}
                   className={`rounded-full px-3 py-1.5 text-sm font-medium ${lang === "es" ? "bg-zinc-900 text-white" : "text-zinc-700"}`}
                   aria-pressed={lang === "es"}
                 >
@@ -319,7 +345,7 @@ export default function Home() {
                 </button>
                 <button
                   type="button"
-                  onClick={() => { setLang("en"); closeMenu(); }}
+                  onClick={() => { setLangWithUrl("en"); closeMenu(); }}
                   className={`rounded-full px-3 py-1.5 text-sm font-medium ${lang === "en" ? "bg-zinc-900 text-white" : "text-zinc-700"}`}
                   aria-pressed={lang === "en"}
                 >
@@ -680,5 +706,13 @@ export default function Home() {
         </div>
       </footer>
     </div>
+  );
+}
+
+export default function Home() {
+  return (
+    <Suspense fallback={null}>
+      <HomeContent />
+    </Suspense>
   );
 }

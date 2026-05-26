@@ -30,8 +30,8 @@ El resto de la configuración está en `.env.example`.
 
 ## Contenido y configuración
 
-- **Favicon** — `app/icon.svg` (iniciales DG). La foto del hero (`public/avatar.png`) se usa en Open Graph al compartir el enlace.
-- **SEO** — `app/sitemap.ts`, `app/robots.ts` y metadatos OG/Twitter en `app/layout.tsx`. Opcional: `NEXT_PUBLIC_SITE_URL` en Vercel si el dominio cambia.
+- **Favicon** — `app/icon.svg` (iniciales DG). **Añadir a inicio** — `app/apple-icon.png` (180×180, generado desde el avatar).
+- **SEO** — OG/Twitter, JSON-LD (`Person` + `WebSite`), `sitemap.xml`, `robots.txt`, hreflang (`/` español, `/?lang=en` inglés). El toggle de idioma actualiza la URL y `lang` del documento. Opcional: `NEXT_PUBLIC_SITE_URL` en Vercel.
 - **Analytics** — Vercel Analytics. Para quitarlo, elimina `<Analytics />` de `app/layout.tsx`.
 
 ## Despliegue (Vercel)

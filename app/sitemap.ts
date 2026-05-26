@@ -1,6 +1,5 @@
 import type { MetadataRoute } from "next";
-
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://donatogomez.dev";
+import { englishHomeUrl, siteUrl } from "./lib/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
@@ -9,6 +8,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 1,
+      alternates: {
+        languages: {
+          es: siteUrl,
+          en: englishHomeUrl(),
+        },
+      },
     },
   ];
 }
