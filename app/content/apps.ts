@@ -36,5 +36,6 @@ export const apps: App[] = [
       en: "Educational app to explore and practice authentic bachata rhythmic patterns. Seven instruments, five sections, BPM control and AVFoundation audio engine. SwiftUI, VoiceOver and bilingual.",
     },
     status: "soon",
+    icon: "/bachatarhythm-logo.png",
   },
 ];

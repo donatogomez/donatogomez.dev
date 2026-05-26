@@ -415,23 +415,23 @@ export default function Home() {
             <p>{t.aboutParagraph}</p>
             <p>{t.aboutParagraph2}</p>
           </div>
-          <div className="mx-auto max-w-md overflow-hidden rounded-2xl border border-zinc-200 bg-gradient-to-b from-zinc-50 to-white p-8 shadow-sm ring-1 ring-zinc-200/50 transition-shadow hover:shadow-md">
-            <div className="flex flex-col items-center text-center">
-              <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-xl bg-zinc-900 text-white" aria-hidden>
-                <svg className="h-7 w-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                </svg>
+          <div className="overflow-hidden rounded-2xl border border-zinc-200 bg-gradient-to-b from-zinc-50 to-white p-6 shadow-sm ring-1 ring-zinc-200/50 transition-shadow hover:shadow-md sm:p-8">
+            <div className="flex flex-col items-center gap-4 sm:flex-row sm:items-center sm:justify-between">
+              <div className="flex items-center gap-4">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-zinc-900 text-white" aria-hidden>
+                  <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
+                </div>
+                <p className="text-sm text-zinc-600">{t.cvSubtitle}</p>
               </div>
-              <p className="text-sm text-zinc-600">
-                {t.cvSubtitle}
-              </p>
               <a
                 href={cvUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-6 inline-flex h-12 min-w-[220px] items-center justify-center gap-2 rounded-xl border-2 border-zinc-900 bg-zinc-900 px-6 text-base font-medium text-white transition-colors hover:border-[#F05138] hover:bg-[#F05138] focus:outline-none focus:ring-2 focus:ring-[#F05138] focus:ring-offset-2"
+                className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-xl border-2 border-zinc-900 bg-zinc-900 px-6 text-sm font-medium text-white transition-colors hover:border-[#F05138] hover:bg-[#F05138] focus:outline-none focus:ring-2 focus:ring-[#F05138] focus:ring-offset-2 sm:w-auto"
               >
-                <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
+                <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                 </svg>
                 {t.cvDownload}
@@ -573,34 +573,36 @@ export default function Home() {
               {t.contactSuccess}
             </p>
           ) : (
-            <form onSubmit={handleContactSubmit} className="mx-auto max-w-md space-y-4 text-left">
-              <div>
-                <label htmlFor="contact-name" className="mb-1 block text-sm font-medium text-zinc-700">
-                  {t.contactNameLabel}
-                </label>
-                <input
-                  id="contact-name"
-                  name="name"
-                  type="text"
-                  required
-                  disabled={formStatus === "loading"}
-                  className="w-full rounded-lg border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-900 placeholder-zinc-400 focus:border-[#F05138] focus:outline-none focus:ring-1 focus:ring-[#F05138] disabled:opacity-60"
-                  placeholder={t.contactNameLabel}
-                />
-              </div>
-              <div>
-                <label htmlFor="contact-email" className="mb-1 block text-sm font-medium text-zinc-700">
-                  {t.contactEmailLabel}
-                </label>
-                <input
-                  id="contact-email"
-                  name="email"
-                  type="email"
-                  required
-                  disabled={formStatus === "loading"}
-                  className="w-full rounded-lg border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-900 placeholder-zinc-400 focus:border-[#F05138] focus:outline-none focus:ring-1 focus:ring-[#F05138] disabled:opacity-60"
-                  placeholder={t.contactEmailLabel}
-                />
+            <form onSubmit={handleContactSubmit} className="space-y-4 text-left">
+              <div className="grid gap-4 sm:grid-cols-2">
+                <div>
+                  <label htmlFor="contact-name" className="mb-1 block text-sm font-medium text-zinc-700">
+                    {t.contactNameLabel}
+                  </label>
+                  <input
+                    id="contact-name"
+                    name="name"
+                    type="text"
+                    required
+                    disabled={formStatus === "loading"}
+                    className="w-full rounded-lg border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-900 placeholder-zinc-400 focus:border-[#F05138] focus:outline-none focus:ring-1 focus:ring-[#F05138] disabled:opacity-60"
+                    placeholder={t.contactNameLabel}
+                  />
+                </div>
+                <div>
+                  <label htmlFor="contact-email" className="mb-1 block text-sm font-medium text-zinc-700">
+                    {t.contactEmailLabel}
+                  </label>
+                  <input
+                    id="contact-email"
+                    name="email"
+                    type="email"
+                    required
+                    disabled={formStatus === "loading"}
+                    className="w-full rounded-lg border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-900 placeholder-zinc-400 focus:border-[#F05138] focus:outline-none focus:ring-1 focus:ring-[#F05138] disabled:opacity-60"
+                    placeholder={t.contactEmailLabel}
+                  />
+                </div>
               </div>
               <div>
                 <label htmlFor="contact-message" className="mb-1 block text-sm font-medium text-zinc-700">
@@ -609,7 +611,7 @@ export default function Home() {
                 <textarea
                   id="contact-message"
                   name="message"
-                  rows={4}
+                  rows={5}
                   required
                   disabled={formStatus === "loading"}
                   className="w-full resize-y rounded-lg border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-900 placeholder-zinc-400 focus:border-[#F05138] focus:outline-none focus:ring-1 focus:ring-[#F05138] disabled:opacity-60"
@@ -621,11 +623,11 @@ export default function Home() {
                   {formError}
                 </p>
               )}
-              <div className="flex justify-center">
+              <div className="flex justify-end">
                 <button
                   type="submit"
                   disabled={formStatus === "loading"}
-                  className="inline-flex h-14 min-w-[180px] items-center justify-center rounded-full bg-zinc-900 px-8 text-base font-medium text-white transition-colors hover:bg-[#F05138] focus:outline-none focus:ring-2 focus:ring-[#F05138] focus:ring-offset-2 disabled:opacity-60"
+                  className="inline-flex h-11 min-w-[160px] items-center justify-center rounded-xl bg-zinc-900 px-8 text-sm font-medium text-white transition-colors hover:bg-[#F05138] focus:outline-none focus:ring-2 focus:ring-[#F05138] focus:ring-offset-2 disabled:opacity-60"
                 >
                   {formStatus === "loading" ? "…" : t.contactSend}
                 </button>
