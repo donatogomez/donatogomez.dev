@@ -30,7 +30,8 @@ El resto de la configuración está en `.env.example`.
 
 ## Contenido y configuración
 
-- **Favicon** — `app/icon.svg` (iniciales DG). Opcional: `public/apple-touch-icon.png` (180×180) para “Añadir a pantalla de inicio”.
+- **Favicon** — `app/icon.svg` (iniciales DG). La foto del hero (`public/avatar.png`) se usa en Open Graph al compartir el enlace.
+- **SEO** — `app/sitemap.ts`, `app/robots.ts` y metadatos OG/Twitter en `app/layout.tsx`. Opcional: `NEXT_PUBLIC_SITE_URL` en Vercel si el dominio cambia.
 - **Analytics** — Vercel Analytics. Para quitarlo, elimina `<Analytics />` de `app/layout.tsx`.
 
 ## Despliegue (Vercel)
