@@ -16,13 +16,13 @@ export const seoCopy = {
     title: "Donato Gómez · Swift 6 y SwiftUI · Apps nativas Apple",
     description:
       "Desarrollador Swift especializado en apps nativas para el ecosistema Apple. Swift 6, SwiftUI, Clean Architecture. Apps en producción que escalan.",
-    jobTitle: "Desarrollador Swift Senior",
+    jobTitle: "Desarrollador iOS",
   },
   en: {
     title: "Donato Gómez · Swift 6 & SwiftUI · Native Apple Apps",
     description:
       "Swift developer specialised in native apps for the Apple ecosystem. Swift 6, SwiftUI, Clean Architecture. Ships production apps that scale.",
-    jobTitle: "Senior Swift Developer",
+    jobTitle: "iOS Developer",
   },
 } as const;
 

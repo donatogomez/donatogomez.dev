@@ -14,7 +14,7 @@ type Lang = "es" | "en";
 const copy: Record<
   Lang,
   {
-    seniorSwiftDeveloper: string;
+    roleTitle: string;
     heroTagline: string;
     viewApps: string;
     linkedin: string;
@@ -53,7 +53,7 @@ const copy: Record<
   }
 > = {
   es: {
-    seniorSwiftDeveloper: "Desarrollador Swift Senior",
+    roleTitle: "Desarrollador iOS",
     heroTagline:
       "Apps nativas para el ecosistema Apple · Arquitectura modular · Swift 6 · SwiftUI · Concurrencia estricta · Apps en producción",
     viewApps: "Ver Apps",
@@ -102,7 +102,7 @@ const copy: Record<
     medium: "Medium",
   },
   en: {
-    seniorSwiftDeveloper: "Senior Swift Developer",
+    roleTitle: "iOS Developer",
     heroTagline:
       "Native apps for the Apple ecosystem · Modular architecture · Swift 6 · SwiftUI · Strict concurrency · Apps in production",
     viewApps: "View Apps",
@@ -380,7 +380,7 @@ function HomeContent() {
                   Donato Gómez
                 </h1>
                 <p className="text-sm font-medium text-zinc-700 sm:text-base">
-                  {t.seniorSwiftDeveloper}
+                  {t.roleTitle}
                 </p>
               </div>
               <p className="mx-auto max-w-xl text-sm leading-relaxed text-zinc-500 sm:mx-0 sm:text-base">
