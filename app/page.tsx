@@ -4,10 +4,11 @@ import { Suspense, useEffect, useState } from "react";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import { apps } from "./content/apps";
+import { socialLinks } from "./lib/site";
 
-const LINKEDIN_URL = "https://www.linkedin.com/in/donatogomez/";
-const GITHUB_URL = "https://github.com/donatogomez";
-const MEDIUM_URL = "https://medium.com/@donatogomez88";
+const LINKEDIN_URL = socialLinks.linkedin;
+const GITHUB_URL = socialLinks.github;
+const MEDIUM_URL = socialLinks.medium;
 
 type Lang = "es" | "en";
 
@@ -16,19 +17,13 @@ const copy: Record<
   {
     roleTitle: string;
     heroTagline: string;
-    viewApps: string;
     linkedin: string;
     appsHeading: string;
     highlightsHeading: string;
-    reviewsHeading: string;
     highlight1: string;
     highlight2: string;
     highlight3: string;
-    highlight4: string;
-    highlight5: string;
     highlight6: string;
-    highlight7: string;
-    highlight8: string;
     appStore: string;
     comingSoon: string;
     aboutHeading: string;
@@ -44,9 +39,7 @@ const copy: Record<
     contactErrorPrefix: string;
     contactErrorSuffix: string;
     contactRequired: string;
-    cvHeading: string;
     cvSubtitle: string;
-    cvNavLabel: string;
     cvDownload: string;
     github: string;
     medium: string;
@@ -56,27 +49,17 @@ const copy: Record<
     roleTitle: "Desarrollador iOS",
     heroTagline:
       "Apps nativas para el ecosistema Apple · Arquitectura modular · Swift 6 · SwiftUI · Concurrencia estricta · Apps en producción",
-    viewApps: "Ver Apps",
     linkedin: "LinkedIn",
     appsHeading: "Apps",
     highlightsHeading: "Destacados",
-    reviewsHeading: "Reseñas",
     highlight1:
       "Swift 6 y SwiftUI en producción: iOS, iPadOS y ecosistema Apple con una sola base de código.",
     highlight2:
       "Clean Architecture, MVVM y flujo unidireccional. Código testeable, modular y listo para crecer.",
     highlight3:
       "Concurrencia con async/await y actors. Desarrollo aumentado con IA sin bajar la calidad.",
-    highlight4:
-      "SwiftData, App Intents y URLSession con async/await. Persistencia, integración con el sistema y red.",
-    highlight5:
-      "DocC para documentación y Swift Testing para tests. Calidad y mantenibilidad desde el día uno.",
     highlight6:
       "Xcode Cloud, Git y entrega continua. Apps publicadas y mantenidas en producción.",
-    highlight7:
-      "Accesibilidad: VoiceOver, Dynamic Type y reducción de movimiento. Diseño inclusivo desde el inicio.",
-    highlight8:
-      "WidgetKit para widgets e integración con el ecosistema. Siri, Shortcuts y App Intents.",
     appStore: "App Store",
     comingSoon: "Próximamente",
     aboutHeading: "Sobre mí",
@@ -94,9 +77,7 @@ const copy: Record<
     contactErrorPrefix: "No se pudo enviar. Intenta de nuevo",
     contactErrorSuffix: "o escribe a",
     contactRequired: "Todos los campos son obligatorios.",
-    cvHeading: "Currículum",
     cvSubtitle: "PDF en español o inglés según el idioma seleccionado.",
-    cvNavLabel: "CV",
     cvDownload: "Descargar CV",
     github: "GitHub",
     medium: "Medium",
@@ -105,27 +86,17 @@ const copy: Record<
     roleTitle: "iOS Developer",
     heroTagline:
       "Native apps for the Apple ecosystem · Modular architecture · Swift 6 · SwiftUI · Strict concurrency · Apps in production",
-    viewApps: "View Apps",
     linkedin: "LinkedIn",
     appsHeading: "Apps",
     highlightsHeading: "Highlights",
-    reviewsHeading: "Reviews",
     highlight1:
       "Swift 6 and SwiftUI in production: iOS, iPadOS and the full Apple ecosystem from a single codebase.",
     highlight2:
       "Clean Architecture, MVVM and unidirectional data flow. Testable, modular code built to scale.",
     highlight3:
       "Structured concurrency with async/await and actors. AI-augmented development without compromising quality.",
-    highlight4:
-      "SwiftData, App Intents and URLSession with async/await. Persistence, system integration and networking.",
-    highlight5:
-      "DocC for documentation and Swift Testing for tests. Quality and maintainability from day one.",
     highlight6:
       "Xcode Cloud, Git and continuous delivery. Apps shipped and maintained in production.",
-    highlight7:
-      "Accessibility: VoiceOver, Dynamic Type and reduced motion. Inclusive design from the start.",
-    highlight8:
-      "WidgetKit for widgets and ecosystem integration. Siri, Shortcuts and App Intents.",
     appStore: "App Store",
     comingSoon: "Coming soon",
     aboutHeading: "About me",
@@ -143,9 +114,7 @@ const copy: Record<
     contactErrorPrefix: "Could not send. Try again",
     contactErrorSuffix: "or email",
     contactRequired: "All fields are required.",
-    cvHeading: "Resume",
     cvSubtitle: "PDF in Spanish or English depending on the selected language.",
-    cvNavLabel: "CV",
     cvDownload: "Download CV",
     github: "GitHub",
     medium: "Medium",
@@ -160,7 +129,7 @@ function langFromSearchParams(searchParams: URLSearchParams): Lang {
 
 function HomeContent() {
   const searchParams = useSearchParams();
-  const [lang, setLang] = useState<Lang>(() => langFromSearchParams(searchParams));
+  const lang = langFromSearchParams(searchParams);
   const [menuOpen, setMenuOpen] = useState(false);
   const [formStatus, setFormStatus] = useState<FormStatus>("idle");
   const [formError, setFormError] = useState<string | null>(null);
@@ -175,13 +144,9 @@ function HomeContent() {
     document.documentElement.lang = lang === "es" ? "es" : "en";
   }, [lang]);
 
-  useEffect(() => {
-    const next = langFromSearchParams(searchParams);
-    setLang((current) => (current === next ? current : next));
-  }, [searchParams]);
-
+  // Next.js sincroniza useSearchParams con window.history.replaceState,
+  // así que el idioma se deriva de la URL sin estado duplicado.
   const setLangWithUrl = (next: Lang) => {
-    setLang(next);
     const url = new URL(window.location.href);
     if (next === "en") {
       url.searchParams.set("lang", "en");
@@ -358,7 +323,6 @@ function HomeContent() {
       </header>
 
       <main className="mx-auto max-w-3xl px-6 pb-24 pt-16 text-center sm:px-8 sm:pt-20 md:pt-24">
-        {/* Orden óptimo: Hero (impacto) → About (contexto) → Apps (portfolio) → Highlights (habilidades) → Reviews (prueba social) → CV (documento) → Contacto (CTA). El menú solo enlaza Apps, About, CV y Contacto. */}
         {/* Hero */}
         <section className="relative flex flex-col gap-8 overflow-hidden rounded-3xl bg-zinc-50 px-6 pt-10 pb-12 sm:px-8 sm:pb-14" aria-labelledby="hero-heading">
           <div className="flex flex-col gap-8 sm:flex-row sm:items-start sm:gap-10">
@@ -548,20 +512,8 @@ function HomeContent() {
                     {item.icon === "concurrency" && (
                       <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
                     )}
-                    {item.icon === "data" && (
-                      <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4" /></svg>
-                    )}
-                    {item.icon === "docs" && (
-                      <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                    )}
                     {item.icon === "ship" && (
                       <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" /></svg>
-                    )}
-                    {item.icon === "a11y" && (
-                      <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
-                    )}
-                    {item.icon === "widgets" && (
-                      <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" /></svg>
                     )}
                   </span>
                   <p className="min-w-0 flex-1 text-sm leading-relaxed text-zinc-700">

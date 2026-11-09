@@ -6,7 +6,7 @@ export const siteName = "Donato Gómez";
 export const socialLinks = {
   linkedin: "https://www.linkedin.com/in/donatogomez/",
   github: "https://github.com/donatogomez",
-  medium: "https://medium.com/@donatogomez88",
+  medium: "https://medium.com/@donatogomez",
 } as const;
 
 export const defaultContactEmail = "donatogomez.dev@gmail.com";
