@@ -28,13 +28,11 @@ export function homeMetadata(lang: Lang): Metadata {
       siteName,
       title,
       description,
-      images: [{ url: "/avatar.png", width: 1200, height: 1200, alt: siteName }],
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      images: ["/avatar.png"],
     },
   };
 }
