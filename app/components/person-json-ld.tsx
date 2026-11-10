@@ -1,5 +1,6 @@
 import {
   defaultContactEmail,
+  englishHomeUrl,
   seoCopy,
   siteName,
   siteUrl,
@@ -59,8 +60,8 @@ export function PersonJsonLd() {
       },
       {
         "@type": "WebPage",
-        "@id": `${siteUrl}/?lang=en#webpage`,
-        url: `${siteUrl}/?lang=en`,
+        "@id": `${siteUrl}/en#webpage`,
+        url: englishHomeUrl(),
         name: seoCopy.en.title,
         description: seoCopy.en.description,
         inLanguage: "en",

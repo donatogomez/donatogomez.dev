@@ -1,199 +1,22 @@
-"use client";
-
-import { Suspense, useEffect, useState } from "react";
 import Image from "next/image";
-import { useSearchParams } from "next/navigation";
-import { apps } from "./content/apps";
-import { socialLinks } from "./lib/site";
+import Link from "next/link";
+import { apps } from "../content/apps";
+import { copy, type Lang } from "../content/copy";
+import { socialLinks } from "../lib/site";
+import { ContactForm } from "./contact-form";
+import { MobileMenu } from "./mobile-menu";
 
 const LINKEDIN_URL = socialLinks.linkedin;
 const GITHUB_URL = socialLinks.github;
 const MEDIUM_URL = socialLinks.medium;
 
-type Lang = "es" | "en";
-
-const copy: Record<
-  Lang,
-  {
-    roleTitle: string;
-    heroTagline: string;
-    linkedin: string;
-    appsHeading: string;
-    highlightsHeading: string;
-    highlight1: string;
-    highlight2: string;
-    highlight3: string;
-    highlight6: string;
-    appStore: string;
-    comingSoon: string;
-    aboutHeading: string;
-    aboutParagraph: string;
-    aboutParagraph2: string;
-    footerContactLabel: string;
-    contactHeading: string;
-    contactNameLabel: string;
-    contactEmailLabel: string;
-    contactMessageLabel: string;
-    contactSend: string;
-    contactSuccess: string;
-    contactErrorPrefix: string;
-    contactErrorSuffix: string;
-    contactRequired: string;
-    cvSubtitle: string;
-    cvDownload: string;
-    github: string;
-    medium: string;
-  }
-> = {
-  es: {
-    roleTitle: "Desarrollador iOS",
-    heroTagline:
-      "Apps nativas para el ecosistema Apple · Arquitectura modular · Swift 6 · SwiftUI · Concurrencia estricta · Apps en producción",
-    linkedin: "LinkedIn",
-    appsHeading: "Apps",
-    highlightsHeading: "Destacados",
-    highlight1:
-      "Swift 6 y SwiftUI en producción: iOS, iPadOS y ecosistema Apple con una sola base de código.",
-    highlight2:
-      "Clean Architecture, MVVM y flujo unidireccional. Código testeable, modular y listo para crecer.",
-    highlight3:
-      "Concurrencia con async/await y actors. Desarrollo aumentado con IA sin bajar la calidad.",
-    highlight6:
-      "Xcode Cloud, Git y entrega continua. Apps publicadas y mantenidas en producción.",
-    appStore: "App Store",
-    comingSoon: "Próximamente",
-    aboutHeading: "Sobre mí",
-    aboutParagraph:
-      "Desarrollo apps nativas para el ecosistema Apple con un enfoque claro en diseño del software y mantenibilidad. Para mí, escribir código no es solo hacer que algo funcione hoy, sino dejar un sistema que otros puedan entender, extender y evolucionar.",
-    aboutParagraph2:
-      "Trabajo con Swift 6 y SwiftUI aplicando arquitectura modular y concurrencia estricta, buscando sistemas claros, predecibles y fáciles de mantener en el tiempo. Aplico herramientas de automatización e inteligencia artificial para agilizar tareas repetitivas, mientras conservo el control absoluto del criterio técnico, las revisiones manuales y las decisiones estratégicas de diseño y arquitectura.",
-    footerContactLabel: "Contacto",
-    contactHeading: "Contacto",
-    contactNameLabel: "Nombre",
-    contactEmailLabel: "Email",
-    contactMessageLabel: "Mensaje",
-    contactSend: "Enviar",
-    contactSuccess: "Mensaje enviado. Te responderé pronto.",
-    contactErrorPrefix: "No se pudo enviar. Intenta de nuevo",
-    contactErrorSuffix: "o escribe a",
-    contactRequired: "Todos los campos son obligatorios.",
-    cvSubtitle: "PDF en español o inglés según el idioma seleccionado.",
-    cvDownload: "Descargar CV",
-    github: "GitHub",
-    medium: "Medium",
-  },
-  en: {
-    roleTitle: "iOS Developer",
-    heroTagline:
-      "Native apps for the Apple ecosystem · Modular architecture · Swift 6 · SwiftUI · Strict concurrency · Apps in production",
-    linkedin: "LinkedIn",
-    appsHeading: "Apps",
-    highlightsHeading: "Highlights",
-    highlight1:
-      "Swift 6 and SwiftUI in production: iOS, iPadOS and the full Apple ecosystem from a single codebase.",
-    highlight2:
-      "Clean Architecture, MVVM and unidirectional data flow. Testable, modular code built to scale.",
-    highlight3:
-      "Structured concurrency with async/await and actors. AI-augmented development without compromising quality.",
-    highlight6:
-      "Xcode Cloud, Git and continuous delivery. Apps shipped and maintained in production.",
-    appStore: "App Store",
-    comingSoon: "Coming soon",
-    aboutHeading: "About me",
-    aboutParagraph:
-      "I develop native apps for the Apple ecosystem with a clear focus on software design and maintainability. For me, writing code isn't just about making something work today—it's about leaving a system that others can understand, extend, and evolve.",
-    aboutParagraph2:
-      "I work with Swift 6 and SwiftUI applying modular architecture and strict concurrency, aiming for clear, predictable systems that are easy to maintain over time. I apply automation and artificial intelligence tools to streamline repetitive tasks, while retaining full control over technical judgment, manual reviews, and strategic design and architecture decisions.",
-    footerContactLabel: "Contact",
-    contactHeading: "Contact",
-    contactNameLabel: "Name",
-    contactEmailLabel: "Email",
-    contactMessageLabel: "Message",
-    contactSend: "Send",
-    contactSuccess: "Message sent. I'll get back to you soon.",
-    contactErrorPrefix: "Could not send. Try again",
-    contactErrorSuffix: "or email",
-    contactRequired: "All fields are required.",
-    cvSubtitle: "PDF in Spanish or English depending on the selected language.",
-    cvDownload: "Download CV",
-    github: "GitHub",
-    medium: "Medium",
-  },
-};
-
-type FormStatus = "idle" | "loading" | "success" | "error";
-
-function langFromSearchParams(searchParams: URLSearchParams): Lang {
-  return searchParams.get("lang") === "en" ? "en" : "es";
-}
-
-function HomeContent() {
-  const searchParams = useSearchParams();
-  const lang = langFromSearchParams(searchParams);
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [formStatus, setFormStatus] = useState<FormStatus>("idle");
-  const [formError, setFormError] = useState<string | null>(null);
+export function Home({ lang }: { lang: Lang }) {
   const t = copy[lang];
   const cvUrl =
     lang === "es"
       ? (process.env.NEXT_PUBLIC_CV_URL_ES ?? "#")
       : (process.env.NEXT_PUBLIC_CV_URL_EN ?? "#");
   const contactEmail = process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "";
-
-  useEffect(() => {
-    document.documentElement.lang = lang === "es" ? "es" : "en";
-  }, [lang]);
-
-  // Next.js sincroniza useSearchParams con window.history.replaceState,
-  // así que el idioma se deriva de la URL sin estado duplicado.
-  const setLangWithUrl = (next: Lang) => {
-    const url = new URL(window.location.href);
-    if (next === "en") {
-      url.searchParams.set("lang", "en");
-    } else {
-      url.searchParams.delete("lang");
-    }
-    const qs = url.searchParams.toString();
-    window.history.replaceState(null, "", qs ? `${url.pathname}?${qs}` : url.pathname);
-  };
-
-  const closeMenu = () => setMenuOpen(false);
-
-  const handleContactSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const form = e.currentTarget;
-    const data = new FormData(form);
-    const name = (data.get("name") as string)?.trim();
-    const email = (data.get("email") as string)?.trim();
-    const message = (data.get("message") as string)?.trim();
-    if (!name || !email || !message) {
-      setFormError(t.contactRequired);
-      setFormStatus("error");
-      return;
-    }
-    setFormError(null);
-    setFormStatus("loading");
-    try {
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, message }),
-      });
-      const json = await res.json().catch(() => ({}));
-      if (!res.ok) {
-        const fallbackMsg = contactEmail ? `${t.contactErrorPrefix} ${t.contactErrorSuffix} ${contactEmail}` : t.contactErrorPrefix;
-        setFormError(json.error ?? fallbackMsg);
-        setFormStatus("error");
-        return;
-      }
-      setFormStatus("success");
-      form.reset();
-    } catch {
-      const fallbackMsg = contactEmail ? `${t.contactErrorPrefix} ${t.contactErrorSuffix} ${contactEmail}` : t.contactErrorPrefix;
-      setFormError(fallbackMsg);
-      setFormStatus("error");
-    }
-  };
 
   return (
     <div className="min-h-screen bg-white font-sans text-zinc-900">
@@ -203,7 +26,6 @@ function HomeContent() {
           <a
             href="#"
             className="text-sm font-semibold tracking-tight text-zinc-900 transition-colors hover:text-zinc-600"
-            onClick={closeMenu}
           >
             Donato Gómez
           </a>
@@ -232,94 +54,39 @@ function HomeContent() {
               {t.contactHeading}
             </a>
             <nav className="ml-1 flex rounded-full border border-zinc-200 bg-zinc-50/80 p-0.5 text-sm" aria-label="Idioma / Language">
-              <button
-                type="button"
-                onClick={() => setLangWithUrl("es")}
+              <Link
+                href="/"
+                hrefLang="es"
+                lang="es"
                 className={`rounded-full px-2.5 py-1 font-medium transition-colors ${
                   lang === "es"
                     ? "bg-zinc-900 text-white"
                     : "text-zinc-700 hover:text-zinc-900"
                 }`}
-                aria-pressed={lang === "es"}
+                aria-current={lang === "es" ? "page" : undefined}
                 aria-label="Español"
               >
                 ES
-              </button>
-              <button
-                type="button"
-                onClick={() => setLangWithUrl("en")}
+              </Link>
+              <Link
+                href="/en"
+                hrefLang="en"
+                lang="en"
                 className={`rounded-full px-2.5 py-1 font-medium transition-colors ${
                   lang === "en"
                     ? "bg-zinc-900 text-white"
                     : "text-zinc-700 hover:text-zinc-900"
                 }`}
-                aria-pressed={lang === "en"}
+                aria-current={lang === "en" ? "page" : undefined}
                 aria-label="English"
               >
                 EN
-              </button>
+              </Link>
             </nav>
           </nav>
 
-          {/* Mobile menu button */}
-          <button
-            type="button"
-            onClick={() => setMenuOpen((o) => !o)}
-            className="flex h-10 w-10 items-center justify-center rounded-lg border border-zinc-200 text-zinc-700 md:hidden"
-            aria-expanded={menuOpen}
-            aria-label={menuOpen ? "Cerrar menú" : "Abrir menú"}
-          >
-            {menuOpen ? (
-              <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            ) : (
-              <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
-            )}
-          </button>
+          <MobileMenu t={t} lang={lang} />
         </div>
-
-        {/* Mobile nav overlay */}
-        {menuOpen && (
-          <div
-            className="absolute left-0 right-0 top-14 z-10 border-b border-zinc-200 bg-white px-6 py-4 shadow-lg md:hidden"
-            role="dialog"
-            aria-label="Menú de navegación"
-          >
-            <nav className="flex flex-col gap-3" aria-label="Principal">
-              <a href="#about" className="py-2 text-sm text-zinc-700 hover:text-zinc-900" onClick={closeMenu}>
-                {t.aboutHeading}
-              </a>
-              <a href="#apps" className="py-2 text-sm text-zinc-700 hover:text-zinc-900" onClick={closeMenu}>
-                {t.appsHeading}
-              </a>
-              <a href="#contact" className="py-2 text-sm text-zinc-700 hover:text-zinc-900" onClick={closeMenu}>
-                {t.contactHeading}
-              </a>
-              <div className="flex gap-2 border-t border-zinc-200 pt-3">
-                <span className="py-2 text-xs text-zinc-500">Idioma</span>
-                <button
-                  type="button"
-                  onClick={() => { setLangWithUrl("es"); closeMenu(); }}
-                  className={`rounded-full px-3 py-1.5 text-sm font-medium ${lang === "es" ? "bg-zinc-900 text-white" : "text-zinc-700"}`}
-                  aria-pressed={lang === "es"}
-                >
-                  ES
-                </button>
-                <button
-                  type="button"
-                  onClick={() => { setLangWithUrl("en"); closeMenu(); }}
-                  className={`rounded-full px-3 py-1.5 text-sm font-medium ${lang === "en" ? "bg-zinc-900 text-white" : "text-zinc-700"}`}
-                  aria-pressed={lang === "en"}
-                >
-                  EN
-                </button>
-              </div>
-            </nav>
-          </div>
-        )}
       </header>
 
       <main className="mx-auto max-w-3xl px-6 pb-24 pt-16 text-center sm:px-8 sm:pt-20 md:pt-24">
@@ -537,72 +304,7 @@ function HomeContent() {
             </h2>
             <div className="mx-auto h-1 w-10 rounded-full bg-[#F05138]" aria-hidden />
           </div>
-          {formStatus === "success" ? (
-            <p className="rounded-lg bg-zinc-100 px-4 py-3 text-sm text-zinc-700">
-              {t.contactSuccess}
-            </p>
-          ) : (
-            <form onSubmit={handleContactSubmit} className="space-y-4 text-left">
-              <div className="grid gap-4 sm:grid-cols-2">
-                <div>
-                  <label htmlFor="contact-name" className="mb-1 block text-sm font-medium text-zinc-700">
-                    {t.contactNameLabel}
-                  </label>
-                  <input
-                    id="contact-name"
-                    name="name"
-                    type="text"
-                    required
-                    disabled={formStatus === "loading"}
-                    className="w-full rounded-lg border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-900 placeholder-zinc-400 focus:border-[#F05138] focus:outline-none focus:ring-1 focus:ring-[#F05138] disabled:opacity-60"
-                    placeholder={t.contactNameLabel}
-                  />
-                </div>
-                <div>
-                  <label htmlFor="contact-email" className="mb-1 block text-sm font-medium text-zinc-700">
-                    {t.contactEmailLabel}
-                  </label>
-                  <input
-                    id="contact-email"
-                    name="email"
-                    type="email"
-                    required
-                    disabled={formStatus === "loading"}
-                    className="w-full rounded-lg border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-900 placeholder-zinc-400 focus:border-[#F05138] focus:outline-none focus:ring-1 focus:ring-[#F05138] disabled:opacity-60"
-                    placeholder={t.contactEmailLabel}
-                  />
-                </div>
-              </div>
-              <div>
-                <label htmlFor="contact-message" className="mb-1 block text-sm font-medium text-zinc-700">
-                  {t.contactMessageLabel}
-                </label>
-                <textarea
-                  id="contact-message"
-                  name="message"
-                  rows={5}
-                  required
-                  disabled={formStatus === "loading"}
-                  className="w-full resize-y rounded-lg border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-900 placeholder-zinc-400 focus:border-[#F05138] focus:outline-none focus:ring-1 focus:ring-[#F05138] disabled:opacity-60"
-                  placeholder={t.contactMessageLabel}
-                />
-              </div>
-              {formError && (
-                <p className="text-sm text-red-600" role="alert">
-                  {formError}
-                </p>
-              )}
-              <div className="flex justify-end">
-                <button
-                  type="submit"
-                  disabled={formStatus === "loading"}
-                  className="inline-flex h-11 min-w-[160px] items-center justify-center rounded-xl bg-zinc-900 px-8 text-sm font-medium text-white transition-colors hover:bg-[#F05138] focus:outline-none focus:ring-2 focus:ring-[#F05138] focus:ring-offset-2 disabled:opacity-60"
-                >
-                  {formStatus === "loading" ? "…" : t.contactSend}
-                </button>
-              </div>
-            </form>
-          )}
+          <ContactForm t={t} contactEmail={contactEmail} />
         </section>
       </main>
 
@@ -658,13 +360,5 @@ function HomeContent() {
         </div>
       </footer>
     </div>
-  );
-}
-
-export default function Home() {
-  return (
-    <Suspense fallback={null}>
-      <HomeContent />
-    </Suspense>
   );
 }

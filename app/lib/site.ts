@@ -27,5 +27,5 @@ export const seoCopy = {
 } as const;
 
 export function englishHomeUrl(): string {
-  return `${siteUrl}/?lang=en`;
+  return `${siteUrl}/en`;
 }
