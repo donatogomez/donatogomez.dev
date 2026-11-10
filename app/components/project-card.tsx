@@ -5,13 +5,23 @@ import type { Project } from "../content/projects";
 const actionClass =
   "inline-flex h-10 items-center justify-center rounded-lg bg-zinc-900 px-4 text-sm font-medium text-white transition-colors hover:bg-zinc-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-600 focus-visible:ring-offset-2";
 
+// Insignias oficiales de Apple y Google, sin modificar (solo se recortó el
+// margen transparente de las de Google Play). Se muestran a 40 px de alto,
+// el mínimo que pide Apple.
+const storeBadges = {
+  appStore: { es: "/badges/app-store-es.svg", en: "/badges/app-store-en.svg", width: 120 },
+  googlePlay: { es: "/badges/google-play-es.png", en: "/badges/google-play-en.png", width: 135 },
+} as const;
+
+const badgeLinkClass =
+  "rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-600 focus-visible:ring-offset-2";
+
 export function ProjectCard({ project, lang, t }: { project: Project; lang: Lang; t: HomeCopy }) {
   const { links } = project;
-  const actions = [
-    links.appStore && { href: links.appStore, label: t.appStore },
-    links.googlePlay && { href: links.googlePlay, label: t.googlePlay },
-    links.repo && { href: links.repo, label: t.viewCode },
-  ].filter((a): a is { href: string; label: string } => Boolean(a));
+  const badges = (["appStore", "googlePlay"] as const).flatMap((store) => {
+    const href = links[store];
+    return href ? [{ store, href, label: t[store] }] : [];
+  });
 
   return (
     <article className="rounded-2xl border border-zinc-200 bg-zinc-50/50 p-6 text-left shadow-sm sm:p-8">
@@ -53,24 +63,31 @@ export function ProjectCard({ project, lang, t }: { project: Project; lang: Lang
         ))}
       </ul>
 
-      <div className="mt-6 flex flex-wrap gap-3">
+      <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
         {project.status === "soon" ? (
           <span className="inline-flex h-10 items-center rounded-lg bg-zinc-200 px-4 text-sm font-medium text-zinc-700">
             {t.comingSoon}
           </span>
         ) : (
-          actions.map((action) => (
-            <a
-              key={action.href}
-              href={action.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={actionClass}
-            >
-              {action.label}
-              <span className="sr-only"> · {project.name}</span>
-            </a>
-          ))
+          <>
+            {badges.map(({ store, href, label }) => (
+              <a key={store} href={href} target="_blank" rel="noopener noreferrer" className={badgeLinkClass}>
+                <Image
+                  src={storeBadges[store][lang]}
+                  alt={`${label} · ${project.name}`}
+                  width={storeBadges[store].width}
+                  height={40}
+                  className="h-10 w-auto"
+                />
+              </a>
+            ))}
+            {links.repo && (
+              <a href={links.repo} target="_blank" rel="noopener noreferrer" className={actionClass}>
+                {t.viewCode}
+                <span className="sr-only"> · {project.name}</span>
+              </a>
+            )}
+          </>
         )}
       </div>
     </article>
