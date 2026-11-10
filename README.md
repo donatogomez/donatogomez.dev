@@ -31,8 +31,8 @@ El resto de la configuración está en `.env.example`.
 ## Contenido y configuración
 
 - **Favicon** — `app/icon.svg` (iniciales DG). **Añadir a inicio** — `app/apple-icon.png` (180×180, generado desde el avatar).
-- **SEO** — OG/Twitter, JSON-LD (`Person` + `WebSite`), `sitemap.xml`, `robots.txt`, hreflang (`/` español, `/?lang=en` inglés). El toggle de idioma actualiza la URL y `lang` del documento. Opcional: `NEXT_PUBLIC_SITE_URL` en Vercel.
-- **Analytics** — Vercel Analytics. Para quitarlo, elimina `<Analytics />` de `app/layout.tsx`.
+- **SEO** — OG/Twitter, JSON-LD (`Person` + `WebSite`), `sitemap.xml`, `robots.txt`, hreflang (`/` español, `/en` inglés; `/?lang=en` redirige a `/en`). Ambas versiones se prerenderizan en el servidor: cada idioma tiene su layout raíz (`app/(es)`, `app/(en)`) con su `<html lang>`, y los textos están en `app/content/copy.ts`. Opcional: `NEXT_PUBLIC_SITE_URL` en Vercel.
+- **Analytics** — Vercel Analytics. Para quitarlo, elimina `<Analytics />` de `app/components/root-document.tsx`.
 
 ## Despliegue (Vercel)
 
