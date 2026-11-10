@@ -23,7 +23,7 @@ Abre [http://localhost:3000](http://localhost:3000).
 Copia `.env.example` a `.env.local` y rellena los valores. **Nunca** subas `.env.local` (está en `.gitignore`).
 
 - **RESEND_API_KEY**, **CONTACT_EMAIL_TO** — Obligatorios para el formulario de contacto ([Resend](https://resend.com)). Sin ellos, el formulario devuelve 503.
-- **NEXT_PUBLIC_CONTACT_EMAIL** — Email que se muestra en el mensaje de error del formulario (“escribe a …”).
+- **NEXT_PUBLIC_CONTACT_EMAIL** — Email visible junto al formulario y en su mensaje de error. Si falta, se usa `defaultContactEmail` de `app/lib/site.ts`.
 - **NEXT_PUBLIC_CV_URL_ES**, **NEXT_PUBLIC_CV_URL_EN** — URLs de descarga directa del CV (p. ej. Google Drive: `https://drive.usercontent.google.com/download?id=FILE_ID&confirm=t`).
 
 El resto de la configuración está en `.env.example`.
