@@ -35,11 +35,11 @@ export function MobileMenu({ t, lang }: { t: HomeCopy; lang: Lang }) {
           aria-label="Menú de navegación"
         >
           <nav className="flex flex-col gap-3" aria-label="Principal">
+            <a href="#apps" className="py-2 text-sm text-zinc-700 hover:text-zinc-900" onClick={closeMenu}>
+              {t.navProjects}
+            </a>
             <a href="#about" className="py-2 text-sm text-zinc-700 hover:text-zinc-900" onClick={closeMenu}>
               {t.aboutHeading}
-            </a>
-            <a href="#apps" className="py-2 text-sm text-zinc-700 hover:text-zinc-900" onClick={closeMenu}>
-              {t.appsHeading}
             </a>
             <a href="#contact" className="py-2 text-sm text-zinc-700 hover:text-zinc-900" onClick={closeMenu}>
               {t.contactHeading}
