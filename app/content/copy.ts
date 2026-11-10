@@ -28,10 +28,19 @@ export type HomeCopy = {
   contactEmailLabel: string;
   contactMessageLabel: string;
   contactSend: string;
+  contactSending: string;
   contactSuccess: string;
   contactErrorPrefix: string;
   contactErrorSuffix: string;
   contactRequired: string;
+  skipToContent: string;
+  mainNavLabel: string;
+  languageLabel: string;
+  menuOpen: string;
+  menuClose: string;
+  contactInvalid: string;
+  contactDirect: string;
+  contactPrivacyNotice: string;
 };
 
 export const copy: Record<Lang, HomeCopy> = {
@@ -66,10 +75,19 @@ export const copy: Record<Lang, HomeCopy> = {
     contactEmailLabel: "Email",
     contactMessageLabel: "Mensaje",
     contactSend: "Enviar",
+    contactSending: "Enviando…",
     contactSuccess: "Mensaje enviado. Te responderé pronto.",
     contactErrorPrefix: "No se pudo enviar. Intenta de nuevo",
     contactErrorSuffix: "o escribe a",
     contactRequired: "Todos los campos son obligatorios.",
+    skipToContent: "Saltar al contenido",
+    mainNavLabel: "Principal",
+    languageLabel: "Idioma",
+    menuOpen: "Abrir menú",
+    menuClose: "Cerrar menú",
+    contactInvalid: "Revisa el email y que el mensaje no supere los 5000 caracteres.",
+    contactDirect: "También puedes escribirme a",
+    contactPrivacyNotice: "Solo usaré tus datos para responderte.",
   },
   en: {
     roleTitle: "iOS Developer",
@@ -102,9 +120,18 @@ export const copy: Record<Lang, HomeCopy> = {
     contactEmailLabel: "Email",
     contactMessageLabel: "Message",
     contactSend: "Send",
+    contactSending: "Sending…",
     contactSuccess: "Message sent. I'll get back to you soon.",
     contactErrorPrefix: "Could not send. Try again",
     contactErrorSuffix: "or email",
     contactRequired: "All fields are required.",
+    skipToContent: "Skip to content",
+    mainNavLabel: "Main",
+    languageLabel: "Language",
+    menuOpen: "Open menu",
+    menuClose: "Close menu",
+    contactInvalid: "Check the email address and keep the message under 5,000 characters.",
+    contactDirect: "You can also email me at",
+    contactPrivacyNotice: "I'll only use your details to reply to you.",
   },
 };

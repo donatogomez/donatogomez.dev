@@ -3,7 +3,7 @@ import type { HomeCopy, Lang } from "../content/copy";
 import type { Project } from "../content/projects";
 
 const actionClass =
-  "inline-flex h-10 items-center justify-center rounded-lg bg-zinc-900 px-4 text-sm font-medium text-white transition-colors hover:bg-zinc-700 focus:outline-none focus:ring-2 focus:ring-zinc-400 focus:ring-offset-2";
+  "inline-flex h-10 items-center justify-center rounded-lg bg-zinc-900 px-4 text-sm font-medium text-white transition-colors hover:bg-zinc-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-600 focus-visible:ring-offset-2";
 
 export function ProjectCard({ project, lang, t }: { project: Project; lang: Lang; t: HomeCopy }) {
   const { links } = project;

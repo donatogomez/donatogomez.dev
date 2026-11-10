@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { copy, type Lang } from "../content/copy";
 import { apps, engineering } from "../content/projects";
-import { socialLinks } from "../lib/site";
+import { defaultContactEmail, socialLinks } from "../lib/site";
 import { ContactForm } from "./contact-form";
 import { GitHubIcon, LinkedInIcon, MediumIcon } from "./icons";
 import { MobileMenu } from "./mobile-menu";
@@ -28,7 +28,7 @@ export function Home({ lang }: { lang: Lang }) {
     lang === "es"
       ? (process.env.NEXT_PUBLIC_CV_URL_ES ?? "#")
       : (process.env.NEXT_PUBLIC_CV_URL_EN ?? "#");
-  const contactEmail = process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "";
+  const contactEmail = process.env.NEXT_PUBLIC_CONTACT_EMAIL || defaultContactEmail;
   const social = [
     { href: socialLinks.linkedin, label: t.linkedin, Icon: LinkedInIcon },
     { href: socialLinks.github, label: t.github, Icon: GitHubIcon },
@@ -37,6 +37,12 @@ export function Home({ lang }: { lang: Lang }) {
 
   return (
     <div className="min-h-screen bg-white font-sans text-zinc-900">
+      <a
+        href="#main"
+        className="sr-only rounded-lg bg-zinc-900 text-sm font-medium text-white focus:not-sr-only focus:px-4 focus:py-2 focus:fixed focus:left-4 focus:top-3 focus:z-30 focus:outline-none focus:ring-2 focus:ring-zinc-600 focus:ring-offset-2"
+      >
+        {t.skipToContent}
+      </a>
       {/* Sticky header */}
       <header className="sticky top-0 z-20 border-b border-zinc-200/80 bg-white/95 backdrop-blur-sm supports-[backdrop-filter]:bg-white/80">
         <div className="mx-auto flex h-14 max-w-3xl items-center justify-between gap-4 px-6 sm:px-8">
@@ -48,20 +54,23 @@ export function Home({ lang }: { lang: Lang }) {
           </a>
 
           {/* Desktop nav */}
-          <nav
-            className="hidden flex-wrap items-center gap-4 md:flex md:gap-6"
-            aria-label="Principal"
-          >
-            <a href="#apps" className={navLinkClass}>
-              {t.navProjects}
-            </a>
-            <a href="#about" className={navLinkClass}>
-              {t.aboutHeading}
-            </a>
-            <a href="#contact" className={navLinkClass}>
-              {t.contactHeading}
-            </a>
-            <nav className="ml-1 flex rounded-full border border-zinc-200 bg-zinc-50/80 p-0.5 text-sm" aria-label="Idioma / Language">
+          <div className="hidden items-center gap-6 md:flex">
+            <nav className="flex flex-wrap items-center gap-6" aria-label={t.mainNavLabel}>
+              <a href="#apps" className={navLinkClass}>
+                {t.navProjects}
+              </a>
+              <a href="#about" className={navLinkClass}>
+                {t.aboutHeading}
+              </a>
+              <a href="#contact" className={navLinkClass}>
+                {t.contactHeading}
+              </a>
+            </nav>
+            <div
+              role="group"
+              className="ml-1 flex rounded-full border border-zinc-200 bg-zinc-50/80 p-0.5 text-sm"
+              aria-label={t.languageLabel}
+            >
               <Link
                 href="/"
                 hrefLang="es"
@@ -90,19 +99,19 @@ export function Home({ lang }: { lang: Lang }) {
               >
                 EN
               </Link>
-            </nav>
-          </nav>
+            </div>
+          </div>
 
           <MobileMenu t={t} lang={lang} />
         </div>
       </header>
 
-      <main className="mx-auto max-w-3xl px-6 pb-24 pt-16 text-center sm:px-8 sm:pt-20 md:pt-24">
+      <main id="main" tabIndex={-1} className="mx-auto max-w-3xl px-6 pb-24 pt-16 text-center focus:outline-none sm:px-8 sm:pt-20 md:pt-24">
         {/* Hero */}
         <section className="relative flex flex-col gap-8 overflow-hidden rounded-3xl bg-zinc-50 px-6 pt-10 pb-12 sm:px-8 sm:pb-14" aria-labelledby="hero-heading">
           <div className="flex flex-col gap-8 sm:flex-row sm:items-start sm:gap-10">
             <div className="flex justify-center sm:justify-start">
-              <div className="group transform-gpu cursor-default transition-transform duration-500 ease-out hover:scale-110">
+              <div className="group transform-gpu cursor-default transition-transform duration-500 ease-out motion-safe:hover:scale-110">
                 <Image
                   src="/avatar.png"
                   alt="Donato Gómez"
@@ -134,7 +143,7 @@ export function Home({ lang }: { lang: Lang }) {
           <div className="flex w-full flex-wrap justify-center gap-3">
             <a
               href="#apps"
-              className="inline-flex h-11 items-center justify-center rounded-full bg-zinc-900 px-6 text-sm font-semibold text-white transition-colors hover:bg-zinc-700 focus:outline-none focus:ring-2 focus:ring-zinc-400 focus:ring-offset-2"
+              className="inline-flex h-11 items-center justify-center rounded-full bg-zinc-900 px-6 text-sm font-semibold text-white transition-colors hover:bg-zinc-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-600 focus-visible:ring-offset-2"
             >
               {t.viewProjects}
             </a>
@@ -142,7 +151,7 @@ export function Home({ lang }: { lang: Lang }) {
               href={cvUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex h-11 items-center justify-center gap-2 rounded-full border border-zinc-300 bg-white px-6 text-sm font-medium text-zinc-700 transition-colors hover:border-zinc-400 hover:bg-zinc-50 focus:outline-none focus:ring-2 focus:ring-zinc-400 focus:ring-offset-2"
+              className="inline-flex h-11 items-center justify-center gap-2 rounded-full border border-zinc-300 bg-white px-6 text-sm font-medium text-zinc-700 transition-colors hover:border-zinc-400 hover:bg-zinc-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-600 focus-visible:ring-offset-2"
             >
               <svg className="h-4 w-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
@@ -248,8 +257,8 @@ export function Home({ lang }: { lang: Lang }) {
               </a>
             ))}
           </nav>
-          <div className="mt-8 text-center text-xs text-zinc-400">
-            <a href="/privacy" className="underline underline-offset-4 hover:text-zinc-600">
+          <div className="mt-8 text-center text-xs text-zinc-600">
+            <a href="/privacy" className="underline underline-offset-4 hover:text-zinc-900">
               {t.privacyPolicy}
             </a>
           </div>
