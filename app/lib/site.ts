@@ -13,15 +13,15 @@ export const defaultContactEmail = "donatogomez.dev@gmail.com";
 
 export const seoCopy = {
   es: {
-    title: "Donato Gómez · Swift 6 y SwiftUI · Apps nativas Apple",
+    title: "Donato Gómez · Desarrollador iOS · Swift y SwiftUI",
     description:
-      "Desarrollador Swift especializado en apps nativas para el ecosistema Apple. Swift 6, SwiftUI, Clean Architecture. Apps en producción que escalan.",
+      "Desarrollador iOS con 4 años de experiencia en apps nativas con Swift 6 y SwiftUI. Autor de ZonaSalsa, en App Store y Google Play. Disponible para trabajar en remoto.",
     jobTitle: "Desarrollador iOS",
   },
   en: {
-    title: "Donato Gómez · Swift 6 & SwiftUI · Native Apple Apps",
+    title: "Donato Gómez · iOS Developer · Swift & SwiftUI",
     description:
-      "Swift developer specialised in native apps for the Apple ecosystem. Swift 6, SwiftUI, Clean Architecture. Ships production apps that scale.",
+      "iOS developer with 4 years of experience building native apps with Swift 6 and SwiftUI. Creator of ZonaSalsa, on the App Store and Google Play. Available for remote work.",
     jobTitle: "iOS Developer",
   },
 } as const;
