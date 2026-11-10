@@ -108,72 +108,71 @@ export function Home({ lang }: { lang: Lang }) {
 
       <main id="main" tabIndex={-1} className="mx-auto max-w-3xl px-6 pb-24 pt-16 text-center focus:outline-none sm:px-8 sm:pt-20 md:pt-24">
         {/* Hero */}
-        <section className="relative flex flex-col gap-8 overflow-hidden rounded-3xl bg-zinc-50 px-6 pt-10 pb-12 sm:px-8 sm:pb-14" aria-labelledby="hero-heading">
-          <div className="flex flex-col gap-8 sm:flex-row sm:items-start sm:gap-10">
-            <div className="flex justify-center sm:justify-start">
-              <div className="group transform-gpu cursor-default transition-transform duration-500 ease-out motion-safe:hover:scale-110">
-                <Image
-                  src="/avatar.png"
-                  alt="Donato Gómez"
-                  width={384}
-                  height={384}
-                  className="h-40 w-40 object-contain sm:h-48 sm:w-48"
-                  priority
-                />
-              </div>
-            </div>
-            <div className="min-w-0 flex-1 space-y-5 text-center sm:text-left">
-              <div className="space-y-1">
-                <h1 id="hero-heading" className="font-bold tracking-tighter text-zinc-900" style={{ fontSize: "clamp(2rem, 3.5vw, 3.25rem)" }}>
-                  Donato Gómez
-                </h1>
-                <p className="text-sm font-medium text-zinc-700 sm:text-base">
-                  {t.roleTitle}
-                </p>
-              </div>
-              <p className="mx-auto max-w-xl text-sm leading-relaxed text-zinc-600 sm:mx-0 sm:text-base">
-                {t.heroTagline}
-              </p>
-              <p className="text-sm font-medium text-zinc-700">
-                <span className="mr-2 inline-block h-2 w-2 rounded-full bg-emerald-500 align-middle" aria-hidden />
-                {t.availability}
+        <section
+          className="flex flex-col items-center gap-8 overflow-hidden rounded-3xl bg-zinc-50 px-6 pt-10 pb-12 md:flex-row md:gap-10 md:px-10 md:py-12"
+          aria-labelledby="hero-heading"
+        >
+          <div className="min-w-0 flex-1 space-y-6 text-center md:text-left">
+            <div className="space-y-3">
+              <div className="mx-auto h-1 w-10 rounded-full bg-[#F05138] md:mx-0" aria-hidden />
+              <h1 id="hero-heading" className="font-bold tracking-tighter text-zinc-900" style={{ fontSize: "clamp(2rem, 3.5vw, 3.25rem)" }}>
+                Donato Gómez
+              </h1>
+              <p className="text-base font-medium text-zinc-700 sm:text-lg">
+                {t.roleTitle} · Swift &amp; SwiftUI
               </p>
             </div>
+            <p className="mx-auto max-w-xl text-sm leading-relaxed text-zinc-600 sm:text-base md:mx-0">
+              {t.heroTagline}
+            </p>
+            <div className="flex flex-wrap justify-center gap-3 md:justify-start">
+              <a
+                href="#apps"
+                className="inline-flex h-11 items-center justify-center rounded-full bg-zinc-900 px-6 text-sm font-semibold text-white transition-colors hover:bg-zinc-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-600 focus-visible:ring-offset-2"
+              >
+                {t.viewProjects}
+              </a>
+              <a
+                href={cvUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex h-11 items-center justify-center gap-2 rounded-full border border-zinc-300 bg-white px-6 text-sm font-medium text-zinc-700 transition-colors hover:border-zinc-400 hover:bg-zinc-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-600 focus-visible:ring-offset-2"
+              >
+                <svg className="h-4 w-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                </svg>
+                {t.cvDownload}
+              </a>
+            </div>
+            <ul className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-zinc-600 md:justify-start">
+              {social.map(({ href, label, Icon }) => (
+                <li key={href}>
+                  <a
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 underline-offset-4 transition-colors hover:text-zinc-900 hover:underline"
+                  >
+                    <Icon className="h-4 w-4 shrink-0" />
+                    {label}
+                  </a>
+                </li>
+              ))}
+            </ul>
           </div>
-          <div className="flex w-full flex-wrap justify-center gap-3">
-            <a
-              href="#apps"
-              className="inline-flex h-11 items-center justify-center rounded-full bg-zinc-900 px-6 text-sm font-semibold text-white transition-colors hover:bg-zinc-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-600 focus-visible:ring-offset-2"
-            >
-              {t.viewProjects}
-            </a>
-            <a
-              href={cvUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex h-11 items-center justify-center gap-2 rounded-full border border-zinc-300 bg-white px-6 text-sm font-medium text-zinc-700 transition-colors hover:border-zinc-400 hover:bg-zinc-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-600 focus-visible:ring-offset-2"
-            >
-              <svg className="h-4 w-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-              </svg>
-              {t.cvDownload}
-            </a>
+          {/* En móvil la foto va primero; en escritorio, a la derecha del texto. */}
+          <div className="order-first shrink-0 md:order-none">
+            <div className="transform-gpu cursor-default transition-transform duration-500 ease-out motion-safe:hover:scale-110">
+              <Image
+                src="/avatar.png"
+                alt="Donato Gómez"
+                width={384}
+                height={384}
+                className="h-40 w-40 object-contain md:h-56 md:w-56"
+                priority
+              />
+            </div>
           </div>
-          <ul className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-zinc-600">
-            {social.map(({ href, label, Icon }) => (
-              <li key={href}>
-                <a
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 underline-offset-4 transition-colors hover:text-zinc-900 hover:underline"
-                >
-                  <Icon className="h-4 w-4 shrink-0" />
-                  {label}
-                </a>
-              </li>
-            ))}
-          </ul>
         </section>
 
         {/* Apps */}

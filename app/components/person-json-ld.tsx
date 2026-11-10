@@ -24,11 +24,6 @@ export function PersonJsonLd() {
         email: `mailto:${email}`,
         jobTitle: seoCopy.en.jobTitle,
         description: seoCopy.en.description,
-        address: {
-          "@type": "PostalAddress",
-          addressLocality: "Murcia",
-          addressCountry: "ES",
-        },
         knowsLanguage: ["es", "en"],
         knowsAbout: [
           "Swift",

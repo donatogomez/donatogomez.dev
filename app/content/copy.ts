@@ -3,7 +3,6 @@ export type Lang = "es" | "en";
 export type HomeCopy = {
   roleTitle: string;
   heroTagline: string;
-  availability: string;
   viewProjects: string;
   cvDownload: string;
   linkedin: string;
@@ -48,7 +47,6 @@ export const copy: Record<Lang, HomeCopy> = {
     roleTitle: "Desarrollador iOS",
     heroTagline:
       "4 años creando apps nativas con Swift y SwiftUI. Autor de ZonaSalsa, publicada en App Store y Google Play, con CarPlay y Siri.",
-    availability: "Disponible · Murcia, España · Preferencia por remoto",
     viewProjects: "Ver proyectos",
     cvDownload: "Descargar CV",
     linkedin: "LinkedIn",
@@ -56,12 +54,12 @@ export const copy: Record<Lang, HomeCopy> = {
     medium: "Medium",
     navProjects: "Proyectos",
     appsHeading: "Apps",
-    engineeringHeading: "Ingeniería",
-    engineeringIntro: "Proyecto de código disponible para ver cómo trabajo: arquitectura, concurrencia y tests.",
+    engineeringHeading: "Cómo trabajo",
+    engineeringIntro: "Un proyecto con el código a la vista: arquitectura, concurrencia y tests.",
     stackLabel: "Tecnologías",
     comingSoon: "Próximamente en App Store",
-    appStore: "App Store",
-    googlePlay: "Google Play",
+    appStore: "Descárgalo en el App Store",
+    googlePlay: "Disponible en Google Play",
     viewCode: "Ver código en GitHub",
     aboutHeading: "Sobre mí",
     aboutParagraph:
@@ -93,7 +91,6 @@ export const copy: Record<Lang, HomeCopy> = {
     roleTitle: "iOS Developer",
     heroTagline:
       "4 years building native apps with Swift and SwiftUI. Creator of ZonaSalsa, live on the App Store and Google Play, with CarPlay and Siri support.",
-    availability: "Available · Murcia, Spain · Remote preferred",
     viewProjects: "View projects",
     cvDownload: "Download CV",
     linkedin: "LinkedIn",
@@ -101,12 +98,12 @@ export const copy: Record<Lang, HomeCopy> = {
     medium: "Medium",
     navProjects: "Projects",
     appsHeading: "Apps",
-    engineeringHeading: "Engineering",
-    engineeringIntro: "A source-available project that shows how I work: architecture, concurrency and tests.",
+    engineeringHeading: "How I work",
+    engineeringIntro: "A project with publicly available source code: architecture, concurrency and tests.",
     stackLabel: "Technologies",
     comingSoon: "Coming soon to the App Store",
-    appStore: "App Store",
-    googlePlay: "Google Play",
+    appStore: "Download on the App Store",
+    googlePlay: "Get it on Google Play",
     viewCode: "View code on GitHub",
     aboutHeading: "About me",
     aboutParagraph:
