@@ -1,12 +1,6 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  experimental: {
-    // Mete el CSS en el HTML: sin él, el navegador espera a descargar la hoja
-    // de estilos (~7 KB) antes de pintar nada. Solo hay tres páginas, así que
-    // perder la caché del CSS entre ellas no compensa esa espera.
-    inlineCss: true,
-  },
   images: {
     // AVIF pesa ~40 % menos que WebP en la foto del hero (un semitono que
     // comprime mal). 448 = 224 px × 2, el tamaño de la foto en escritorio
