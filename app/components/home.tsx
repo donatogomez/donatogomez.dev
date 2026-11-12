@@ -26,10 +26,8 @@ function SectionHeading({ id, children }: { id: string; children: React.ReactNod
 
 export function Home({ lang }: { lang: Lang }) {
   const t = copy[lang];
-  const cvUrl =
-    lang === "es"
-      ? (process.env.NEXT_PUBLIC_CV_URL_ES ?? "#")
-      : (process.env.NEXT_PUBLIC_CV_URL_EN ?? "#");
+  // Variante web del CV general de ios-career (sin teléfono), en public/cv/.
+  const cvUrl = `/cv/Donato-Gomez-CV-${lang}.pdf`;
   const contactEmail = process.env.NEXT_PUBLIC_CONTACT_EMAIL || defaultContactEmail;
   const dateFormat = new Intl.DateTimeFormat(lang === "es" ? "es-ES" : "en-GB", {
     day: "numeric",

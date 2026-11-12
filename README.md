@@ -24,7 +24,6 @@ Copia `.env.example` a `.env.local` y rellena los valores. **Nunca** subas `.env
 
 - **RESEND_API_KEY**, **CONTACT_EMAIL_TO** — Obligatorios para el formulario de contacto ([Resend](https://resend.com)). Sin ellos, el formulario devuelve 503.
 - **NEXT_PUBLIC_CONTACT_EMAIL** — Email visible junto al formulario y en su mensaje de error. Si falta, se usa `defaultContactEmail` de `app/lib/site.ts`.
-- **NEXT_PUBLIC_CV_URL_ES**, **NEXT_PUBLIC_CV_URL_EN** — URLs de descarga directa del CV (p. ej. Google Drive: `https://drive.usercontent.google.com/download?id=FILE_ID&confirm=t`).
 
 El resto de la configuración está en `.env.example`.
 
@@ -33,11 +32,12 @@ El resto de la configuración está en `.env.example`.
 - **Favicon** — `app/icon.svg` (iniciales DG). **Añadir a inicio** — `app/apple-icon.png` (180×180, generado desde el avatar).
 - **SEO** — OG/Twitter, JSON-LD (`Person` + `WebSite`), `sitemap.xml`, `robots.txt`, hreflang (`/` español, `/en` inglés; `/?lang=en` redirige a `/en`). Ambas versiones se prerenderizan en el servidor: cada idioma tiene su layout raíz (`app/(es)`, `app/(en)`) con su `<html lang>`, y los textos están en `app/content/copy.ts`. Opcional: `NEXT_PUBLIC_SITE_URL` en Vercel.
 - **Imagen para redes** — 1200×630 generada en el build con `next/og` (`app/lib/og-image.tsx`), una por idioma (`app/(es)/opengraph-image.tsx`, `app/(en)/en/opengraph-image.tsx`), con los textos de `copy.ts`.
+- **CV** — `public/cv/Donato-Gomez-CV-{es,en}.pdf`: la variante web (sin teléfono) del CV general que genera `~/Documents/ios-career` (`cv/build/Donato-Gomez-CV-web-*.pdf`). Si cambia allí, se vuelve a copiar aquí.
 - **Analytics** — Vercel Analytics. Para quitarlo, elimina `<Analytics />` de `app/components/root-document.tsx`.
 
 ## Despliegue (Vercel)
 
-Despliega en [Vercel](https://vercel.com). En el proyecto → Settings → Environment Variables añade las mismas variables que en `.env.example` (sobre todo `RESEND_API_KEY`, `CONTACT_EMAIL_TO`, `NEXT_PUBLIC_CONTACT_EMAIL`, `NEXT_PUBLIC_CV_URL_ES`, `NEXT_PUBLIC_CV_URL_EN`).
+Despliega en [Vercel](https://vercel.com). En el proyecto → Settings → Environment Variables añade las mismas variables que en `.env.example` (sobre todo `RESEND_API_KEY`, `CONTACT_EMAIL_TO` y `NEXT_PUBLIC_CONTACT_EMAIL`).
 
 ## Licencia
 
