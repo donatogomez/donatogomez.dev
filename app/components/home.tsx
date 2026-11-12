@@ -168,8 +168,10 @@ export function Home({ lang }: { lang: Lang }) {
                 alt="Donato Gómez"
                 width={384}
                 height={384}
+                sizes="(min-width: 768px) 224px, 160px"
                 className="h-40 w-40 object-contain md:h-56 md:w-56"
-                priority
+                preload
+                fetchPriority="high"
               />
             </div>
           </div>
