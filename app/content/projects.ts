@@ -59,7 +59,7 @@ export const apps: Project[] = [
   {
     id: "bachata-rhythm",
     name: "Bachata Rhythm",
-    icon: "/bachatarhythm-logo.png",
+    icon: "/bachatarhythm-icon.webp",
     status: "soon",
     platforms: { es: "iPhone", en: "iPhone" },
     description: {

@@ -17,6 +17,11 @@ export type HomeCopy = {
   appStore: string;
   googlePlay: string;
   viewCode: string;
+  articlesHeading: string;
+  articlesIntro: string;
+  articlesLanguage: string;
+  articlesReadingTime: string;
+  articlesAll: string;
   aboutHeading: string;
   aboutParagraph: string;
   aboutParagraph2: string;
@@ -61,6 +66,11 @@ export const copy: Record<Lang, HomeCopy> = {
     appStore: "Descárgalo en el App Store",
     googlePlay: "Disponible en Google Play",
     viewCode: "Ver código en GitHub",
+    articlesHeading: "Artículos",
+    articlesIntro: "Escribo sobre Swift moderno en Medium: Swift 6, concurrencia estricta y arquitectura en SwiftUI.",
+    articlesLanguage: "En inglés",
+    articlesReadingTime: "min de lectura",
+    articlesAll: "Todos mis artículos en Medium",
     aboutHeading: "Sobre mí",
     aboutParagraph:
       "Desarrollo apps nativas para el ecosistema Apple con un enfoque claro en diseño del software y mantenibilidad. Para mí, escribir código no es solo hacer que algo funcione hoy, sino dejar un sistema que otros puedan entender, extender y evolucionar.",
@@ -105,6 +115,11 @@ export const copy: Record<Lang, HomeCopy> = {
     appStore: "Download on the App Store",
     googlePlay: "Get it on Google Play",
     viewCode: "View code on GitHub",
+    articlesHeading: "Articles",
+    articlesIntro: "I write about modern Swift on Medium: Swift 6, strict concurrency and SwiftUI architecture.",
+    articlesLanguage: "",
+    articlesReadingTime: "min read",
+    articlesAll: "All my articles on Medium",
     aboutHeading: "About me",
     aboutParagraph:
       "I develop native apps for the Apple ecosystem with a clear focus on software design and maintainability. For me, writing code isn't just about making something work today—it's about leaving a system that others can understand, extend, and evolve.",

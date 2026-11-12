@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { copy, type Lang } from "../content/copy";
+import { articles } from "../content/articles";
 import { apps, engineering } from "../content/projects";
 import { defaultContactEmail, socialLinks } from "../lib/site";
 import { ContactForm } from "./contact-form";
@@ -29,6 +30,12 @@ export function Home({ lang }: { lang: Lang }) {
       ? (process.env.NEXT_PUBLIC_CV_URL_ES ?? "#")
       : (process.env.NEXT_PUBLIC_CV_URL_EN ?? "#");
   const contactEmail = process.env.NEXT_PUBLIC_CONTACT_EMAIL || defaultContactEmail;
+  const dateFormat = new Intl.DateTimeFormat(lang === "es" ? "es-ES" : "en-GB", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+    timeZone: "UTC",
+  });
   const social = [
     { href: socialLinks.linkedin, label: t.linkedin, Icon: LinkedInIcon },
     { href: socialLinks.github, label: t.github, Icon: GitHubIcon },
@@ -58,6 +65,9 @@ export function Home({ lang }: { lang: Lang }) {
             <nav className="flex flex-wrap items-center gap-6" aria-label={t.mainNavLabel}>
               <a href="#apps" className={navLinkClass}>
                 {t.navProjects}
+              </a>
+              <a href="#articles" className={navLinkClass}>
+                {t.articlesHeading}
               </a>
               <a href="#about" className={navLinkClass}>
                 {t.aboutHeading}
@@ -212,6 +222,55 @@ export function Home({ lang }: { lang: Lang }) {
               </li>
             ))}
           </ul>
+        </section>
+
+        {/* Articles */}
+        <section
+          id="articles"
+          className="scroll-mt-16 space-y-10 pb-20 sm:pb-28"
+          aria-labelledby="articles-heading"
+        >
+          <div className="space-y-4">
+            <SectionHeading id="articles-heading">{t.articlesHeading}</SectionHeading>
+            <p className="mx-auto max-w-prose text-sm leading-relaxed text-zinc-600 sm:text-base">
+              {t.articlesIntro}
+            </p>
+          </div>
+          <ul className="space-y-4 text-left">
+            {articles.map((article) => (
+              <li
+                key={article.url}
+                className="relative rounded-2xl border border-zinc-200 bg-zinc-50/50 p-6 shadow-sm transition-colors focus-within:ring-2 focus-within:ring-zinc-600 focus-within:ring-offset-2 hover:border-zinc-300 hover:bg-zinc-50"
+              >
+                <h3 className="font-semibold text-zinc-900" lang="en">
+                  {/* El enlace cubre toda la tarjeta. */}
+                  <a
+                    href={article.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="after:absolute after:inset-0 after:rounded-2xl focus-visible:outline-none"
+                  >
+                    {article.title}
+                  </a>
+                </h3>
+                <p className="mt-2 text-sm leading-relaxed text-zinc-700">{article.summary[lang]}</p>
+                <p className="mt-3 text-xs text-zinc-600">
+                  <time dateTime={article.published}>{dateFormat.format(new Date(article.published))}</time>
+                  {` · ${article.readingMinutes} ${t.articlesReadingTime}`}
+                  {t.articlesLanguage && ` · ${t.articlesLanguage}`}
+                </p>
+              </li>
+            ))}
+          </ul>
+          <a
+            href={socialLinks.medium}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 text-sm font-medium text-zinc-700 underline underline-offset-4 transition-colors hover:text-zinc-900"
+          >
+            <MediumIcon className="h-4 w-4 shrink-0" />
+            {t.articlesAll}
+          </a>
         </section>
 
         {/* About */}
