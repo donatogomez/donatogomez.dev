@@ -93,8 +93,8 @@ export const engineering: Project[] = [
     status: "live",
     platforms: { es: "iOS 26 · watchOS", en: "iOS 26 · watchOS" },
     description: {
-      es: "App offline-first para monitorizar una flota de sensores IoT. Es un proyecto de referencia: el producto es la ingeniería, y el código y la documentación están en GitHub.",
-      en: "An offline-first app for monitoring a fleet of IoT sensors. It is a reference project: the product is the engineering, and the code and documentation are on GitHub.",
+      es: "App offline-first para monitorizar una flota de sensores IoT. Es un proyecto de referencia para enseñar cómo construyo una app de principio a fin, con el código y la documentación en GitHub.",
+      en: "An offline-first app for monitoring a fleet of IoT sensors. It is a reference project that shows how I build an app end to end, with the code and documentation on GitHub.",
     },
     highlights: {
       es: [
