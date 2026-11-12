@@ -13,6 +13,7 @@ export type HomeCopy = {
   engineeringHeading: string;
   engineeringIntro: string;
   stackLabel: string;
+  screenshotsLabel: string;
   comingSoon: string;
   appStore: string;
   googlePlay: string;
@@ -62,6 +63,7 @@ export const copy: Record<Lang, HomeCopy> = {
     engineeringHeading: "Cómo trabajo",
     engineeringIntro: "Un proyecto con el código a la vista: arquitectura, concurrencia y tests.",
     stackLabel: "Tecnologías",
+    screenshotsLabel: "Capturas de pantalla",
     comingSoon: "Próximamente en App Store",
     appStore: "Descárgalo en el App Store",
     googlePlay: "Disponible en Google Play",
@@ -111,6 +113,7 @@ export const copy: Record<Lang, HomeCopy> = {
     engineeringHeading: "How I work",
     engineeringIntro: "A project with publicly available source code: architecture, concurrency and tests.",
     stackLabel: "Technologies",
+    screenshotsLabel: "Screenshots",
     comingSoon: "Coming soon to the App Store",
     appStore: "Download on the App Store",
     googlePlay: "Get it on Google Play",

@@ -18,6 +18,8 @@ export type Project = {
   /** Decisiones técnicas verificables en el repositorio de cada proyecto. */
   highlights: Localized<string[]>;
   stack: string[];
+  /** Capturas del simulador (iPhone 17 Pro), en `public/screenshots/` a 600 × 1304. */
+  screenshots?: { src: string; alt: Localized }[];
   links: {
     appStore?: string;
     googlePlay?: string;
@@ -51,6 +53,29 @@ export const apps: Project[] = [
       ],
     },
     stack: ["Swift 6", "SwiftUI", "App Intents", "CarPlay", "AVFoundation", "Swift Testing", "Kotlin", "Jetpack Compose"],
+    screenshots: [
+      {
+        src: "/screenshots/zonasalsa-player.webp",
+        alt: {
+          es: "Reproductor en directo en modo oscuro, con la canción que suena y las últimas canciones.",
+          en: "Live player in dark mode, showing the current song and recently played tracks.",
+        },
+      },
+      {
+        src: "/screenshots/zonasalsa-settings.webp",
+        alt: {
+          es: "Ajustes: reproducción automática, historial y tema de la app.",
+          en: "Settings: autoplay, history and app theme.",
+        },
+      },
+      {
+        src: "/screenshots/zonasalsa-light.webp",
+        alt: {
+          es: "Reproductor en directo en modo claro.",
+          en: "Live player in light mode.",
+        },
+      },
+    ],
     links: {
       appStore: "https://apps.apple.com/app/id6759666915",
       googlePlay: "https://play.google.com/store/apps/details?id=dev.donatogomez.zonasalsaradio",
@@ -81,6 +106,29 @@ export const apps: Project[] = [
       ],
     },
     stack: ["Swift 6", "SwiftUI", "AVAudioEngine", "Swift Testing"],
+    screenshots: [
+      {
+        src: "/screenshots/bachatarhythm-welcome.webp",
+        alt: {
+          es: "Pantalla de bienvenida: «Aprende a escuchar la bachata».",
+          en: "Onboarding welcome screen.",
+        },
+      },
+      {
+        src: "/screenshots/bachatarhythm-player.webp",
+        alt: {
+          es: "Reproductor sonando a 120 BPM, con el conteo del 1 al 8, las secciones y los instrumentos.",
+          en: "Player running at 120 BPM, with the 1–8 count, the sections and the instruments.",
+        },
+      },
+      {
+        src: "/screenshots/bachatarhythm-instrument.webp",
+        alt: {
+          es: "Instrumento desplegado con su control de volumen.",
+          en: "Expanded instrument with its volume control.",
+        },
+      },
+    ],
     links: {},
   },
 ];
@@ -111,6 +159,29 @@ export const engineering: Project[] = [
       ],
     },
     stack: ["Swift 6", "SwiftUI", "SwiftData", "Swift Charts", "WidgetKit", "App Intents", "Swift Testing"],
+    screenshots: [
+      {
+        src: "/screenshots/signalflow-overview.webp",
+        alt: {
+          es: "Resumen de la flota: alertas activas, indicador de salud y estado de los dispositivos.",
+          en: "Fleet overview: active alerts, health gauge and device status.",
+        },
+      },
+      {
+        src: "/screenshots/signalflow-devices.webp",
+        alt: {
+          es: "Lista de dispositivos con búsqueda, filtros por estado y los que requieren atención.",
+          en: "Device list with search, status filters and the devices that need attention.",
+        },
+      },
+      {
+        src: "/screenshots/signalflow-detail.webp",
+        alt: {
+          es: "Detalle de un dispositivo con la gráfica de temperatura y la telemetría actual.",
+          en: "Device detail with the temperature chart and current telemetry.",
+        },
+      },
+    ],
     links: { repo: "https://github.com/donatogomez/signal-flow" },
   },
 ];

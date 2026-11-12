@@ -43,6 +43,29 @@ export function ProjectCard({ project, lang, t }: { project: Project; lang: Lang
         {project.description[lang]}
       </p>
 
+      {project.screenshots && (
+        // En móvil no caben las tres: la tira se desliza en horizontal y llega
+        // hasta el borde de la tarjeta. tabIndex permite desplazarla con teclado.
+        <ul
+          className="-mx-6 mt-5 flex snap-x snap-mandatory gap-3 overflow-x-auto px-6 pb-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-600 sm:mx-0 sm:justify-center sm:px-0"
+          aria-label={`${t.screenshotsLabel} · ${project.name}`}
+          tabIndex={0}
+        >
+          {project.screenshots.map((shot) => (
+            <li key={shot.src} className="w-36 shrink-0 snap-start sm:w-40">
+              <Image
+                src={shot.src}
+                alt={shot.alt[lang]}
+                width={600}
+                height={1304}
+                sizes="(min-width: 640px) 160px, 144px"
+                className="h-auto w-full rounded-2xl ring-1 ring-zinc-200"
+              />
+            </li>
+          ))}
+        </ul>
+      )}
+
       <ul className="mt-4 space-y-2 text-sm leading-relaxed text-zinc-700">
         {project.highlights[lang].map((item) => (
           <li key={item} className="flex gap-3">
