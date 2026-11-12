@@ -69,6 +69,9 @@ export function MobileMenu({ t, lang }: { t: HomeCopy; lang: Lang }) {
           <a href="#apps" className={linkClass} onClick={closeMenu}>
             {t.navProjects}
           </a>
+          <a href="#articles" className={linkClass} onClick={closeMenu}>
+            {t.articlesHeading}
+          </a>
           <a href="#about" className={linkClass} onClick={closeMenu}>
             {t.aboutHeading}
           </a>
