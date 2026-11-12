@@ -180,16 +180,17 @@ export function Home({ lang }: { lang: Lang }) {
               ))}
             </ul>
           </div>
-          {/* En móvil la foto va primero; en escritorio, a la derecha del texto. */}
-          <div className="order-first shrink-0 md:order-none">
+          {/* En móvil la foto va primero, con un fundido abajo para que no se vea
+              el corte; en escritorio, a la derecha y apoyada en el borde inferior. */}
+          <div className="order-first shrink-0 [mask-image:linear-gradient(to_bottom,black_70%,transparent)] md:order-none md:-mb-12 md:self-end md:[mask-image:none]">
             <div className="transform-gpu cursor-default transition-transform duration-500 ease-out motion-safe:hover:scale-105">
               <Image
-                src="/portrait.jpg"
+                src="/portrait.png"
                 alt="Donato Gómez"
-                width={1122}
-                height={1402}
-                sizes="(min-width: 768px) 224px, 160px"
-                className="h-auto w-40 rounded-3xl shadow-lg md:w-56"
+                width={635}
+                height={960}
+                sizes="(min-width: 768px) 212px, 148px"
+                className="h-56 w-auto md:h-80"
                 preload
                 fetchPriority="high"
               />
@@ -296,11 +297,17 @@ export function Home({ lang }: { lang: Lang }) {
               {t.articlesIntro}
             </p>
           </div>
-          <ul className="grid gap-4 text-left md:grid-cols-3">
+          {/* Carrusel: en escritorio caben tres tarjetas y, si hay más, se desliza;
+              en móvil asoma la siguiente. El padding deja sitio al anillo de foco. */}
+          <ul
+            className="-m-1 flex snap-x snap-mandatory gap-4 overflow-x-auto p-1 pb-3 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-600"
+            aria-label={t.articlesHeading}
+            tabIndex={0}
+          >
             {articles.map((article) => (
               <li
                 key={article.url}
-                className="group relative flex flex-col overflow-hidden rounded-2xl border border-zinc-200 bg-zinc-50/50 shadow-sm transition-colors focus-within:ring-2 focus-within:ring-zinc-600 focus-within:ring-offset-2 hover:border-zinc-300 hover:bg-zinc-50"
+                className="group relative flex w-4/5 shrink-0 snap-start flex-col overflow-hidden md:w-[calc((100%-2rem)/3)] rounded-2xl border border-zinc-200 bg-zinc-50/50 shadow-sm transition-colors focus-within:ring-2 focus-within:ring-zinc-600 focus-within:ring-offset-2 hover:border-zinc-300 hover:bg-zinc-50"
               >
                 <div className="aspect-video overflow-hidden bg-zinc-900">
                   <Image
@@ -308,7 +315,7 @@ export function Home({ lang }: { lang: Lang }) {
                     alt=""
                     width={800}
                     height={450}
-                    sizes="(min-width: 768px) 224px, calc(100vw - 48px)"
+                    sizes="(min-width: 768px) 224px, 80vw"
                     className="h-full w-full object-cover transition-transform duration-500 ease-out motion-safe:group-hover:scale-105"
                   />
                 </div>

@@ -10,8 +10,8 @@ export const ogSize = { width: 1200, height: 630 };
 // a partir de los mismos textos de la landing, una por idioma.
 export async function renderOgImage(lang: Lang) {
   const t = copy[lang];
-  const portrait = await readFile(join(process.cwd(), "public/portrait.jpg"));
-  const portraitSrc = `data:image/jpeg;base64,${portrait.toString("base64")}`;
+  const portrait = await readFile(join(process.cwd(), "public/portrait.png"));
+  const portraitSrc = `data:image/png;base64,${portrait.toString("base64")}`;
 
   return new ImageResponse(
     (
@@ -41,7 +41,7 @@ export async function renderOgImage(lang: Lang) {
           <div style={{ marginTop: 40, fontSize: 26, color: "#52525b" }}>donatogomez.dev</div>
         </div>
         {/* eslint-disable-next-line @next/next/no-img-element -- ImageResponse solo admite <img> */}
-        <img src={portraitSrc} width={360} height={450} alt="" style={{ borderRadius: 32 }} />
+        <img src={portraitSrc} width={360} height={544} alt="" style={{ alignSelf: "flex-end" }} />
       </div>
     ),
     ogSize,
