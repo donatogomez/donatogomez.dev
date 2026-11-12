@@ -182,14 +182,14 @@ export function Home({ lang }: { lang: Lang }) {
           </div>
           {/* En móvil la foto va primero; en escritorio, a la derecha del texto. */}
           <div className="order-first shrink-0 md:order-none">
-            <div className="transform-gpu cursor-default transition-transform duration-500 ease-out motion-safe:hover:scale-110">
+            <div className="transform-gpu cursor-default transition-transform duration-500 ease-out motion-safe:hover:scale-105">
               <Image
-                src="/avatar.png"
+                src="/portrait.jpg"
                 alt="Donato Gómez"
-                width={384}
-                height={384}
+                width={1122}
+                height={1402}
                 sizes="(min-width: 768px) 224px, 160px"
-                className="h-40 w-40 object-contain md:h-56 md:w-56"
+                className="h-auto w-40 rounded-3xl shadow-lg md:w-56"
                 preload
                 fetchPriority="high"
               />
@@ -296,29 +296,41 @@ export function Home({ lang }: { lang: Lang }) {
               {t.articlesIntro}
             </p>
           </div>
-          <ul className="space-y-4 text-left">
+          <ul className="grid gap-4 text-left md:grid-cols-3">
             {articles.map((article) => (
               <li
                 key={article.url}
-                className="relative rounded-2xl border border-zinc-200 bg-zinc-50/50 p-6 shadow-sm transition-colors focus-within:ring-2 focus-within:ring-zinc-600 focus-within:ring-offset-2 hover:border-zinc-300 hover:bg-zinc-50"
+                className="group relative flex flex-col overflow-hidden rounded-2xl border border-zinc-200 bg-zinc-50/50 shadow-sm transition-colors focus-within:ring-2 focus-within:ring-zinc-600 focus-within:ring-offset-2 hover:border-zinc-300 hover:bg-zinc-50"
               >
-                <h3 className="font-semibold text-zinc-900" lang="en">
-                  {/* El enlace cubre toda la tarjeta. */}
-                  <a
-                    href={article.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="after:absolute after:inset-0 after:rounded-2xl focus-visible:outline-none"
-                  >
-                    {article.title}
-                  </a>
-                </h3>
-                <p className="mt-2 text-sm leading-relaxed text-zinc-700">{article.summary[lang]}</p>
-                <p className="mt-3 text-xs text-zinc-600">
-                  <time dateTime={article.published}>{dateFormat.format(new Date(article.published))}</time>
-                  {` · ${article.readingMinutes} ${t.articlesReadingTime}`}
-                  {t.articlesLanguage && ` · ${t.articlesLanguage}`}
-                </p>
+                <div className="aspect-video overflow-hidden bg-zinc-900">
+                  <Image
+                    src={article.cover}
+                    alt=""
+                    width={800}
+                    height={450}
+                    sizes="(min-width: 768px) 224px, calc(100vw - 48px)"
+                    className="h-full w-full object-cover transition-transform duration-500 ease-out motion-safe:group-hover:scale-105"
+                  />
+                </div>
+                <div className="flex flex-1 flex-col p-5">
+                  <h3 className="font-semibold text-zinc-900" lang="en">
+                    {/* El enlace cubre toda la tarjeta. */}
+                    <a
+                      href={article.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="after:absolute after:inset-0 after:rounded-2xl focus-visible:outline-none"
+                    >
+                      {article.title}
+                    </a>
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed text-zinc-700">{article.summary[lang]}</p>
+                  <p className="mt-auto pt-3 text-xs text-zinc-600">
+                    <time dateTime={article.published}>{dateFormat.format(new Date(article.published))}</time>
+                    {` · ${article.readingMinutes} ${t.articlesReadingTime}`}
+                    {t.articlesLanguage && ` · ${t.articlesLanguage}`}
+                  </p>
+                </div>
               </li>
             ))}
           </ul>

@@ -10,7 +10,7 @@ import {
 export function PersonJsonLd() {
   const email =
     process.env.NEXT_PUBLIC_CONTACT_EMAIL?.trim() || defaultContactEmail;
-  const imageUrl = `${siteUrl}/avatar.png`;
+  const imageUrl = `${siteUrl}/portrait.jpg`;
 
   const schema = {
     "@context": "https://schema.org",
