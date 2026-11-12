@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { copy, type Lang } from "../content/copy";
 import { articles } from "../content/articles";
+import { experience } from "../content/experience";
 import { apps, engineering } from "../content/projects";
 import { defaultContactEmail, socialLinks } from "../lib/site";
 import { ContactForm } from "./contact-form";
@@ -36,6 +37,12 @@ export function Home({ lang }: { lang: Lang }) {
     year: "numeric",
     timeZone: "UTC",
   });
+  const monthFormat = new Intl.DateTimeFormat(lang === "es" ? "es-ES" : "en-GB", {
+    month: "short",
+    year: "numeric",
+    timeZone: "UTC",
+  });
+  const formatMonth = (value: string) => monthFormat.format(new Date(`${value}-01`));
   const social = [
     { href: socialLinks.linkedin, label: t.linkedin, Icon: LinkedInIcon },
     { href: socialLinks.github, label: t.github, Icon: GitHubIcon },
@@ -65,6 +72,9 @@ export function Home({ lang }: { lang: Lang }) {
             <nav className="flex flex-wrap items-center gap-6" aria-label={t.mainNavLabel}>
               <a href="#apps" className={navLinkClass}>
                 {t.navProjects}
+              </a>
+              <a href="#experience" className={navLinkClass}>
+                {t.experienceHeading}
               </a>
               <a href="#articles" className={navLinkClass}>
                 {t.articlesHeading}
@@ -222,6 +232,56 @@ export function Home({ lang }: { lang: Lang }) {
               </li>
             ))}
           </ul>
+        </section>
+
+        {/* Experience */}
+        <section
+          id="experience"
+          className="scroll-mt-16 space-y-10 pb-20 sm:pb-28"
+          aria-labelledby="experience-heading"
+        >
+          <SectionHeading id="experience-heading">{t.experienceHeading}</SectionHeading>
+          <ol className="space-y-10 border-l border-zinc-200 pl-6 text-left sm:pl-8">
+            {experience.map((position) => (
+              <li key={position.id} className="relative">
+                <span
+                  className="absolute -left-[31px] top-1.5 h-3 w-3 rounded-full bg-[#F05138] ring-4 ring-white sm:-left-[39px]"
+                  aria-hidden
+                />
+                <h3 className="font-semibold text-zinc-900">
+                  {position.role} · {position.organization[lang]}
+                </h3>
+                <p className="mt-1 text-sm text-zinc-600">
+                  <time dateTime={position.start}>{formatMonth(position.start)}</time>
+                  {" – "}
+                  {position.end ? (
+                    <time dateTime={position.end}>{formatMonth(position.end)}</time>
+                  ) : (
+                    t.experiencePresent
+                  )}
+                  {` · ${position.location[lang]}`}
+                </p>
+                {position.summary && (
+                  <p className="mt-3 text-sm leading-relaxed text-zinc-700 sm:text-base">
+                    {position.summary[lang]}
+                  </p>
+                )}
+                {position.items && (
+                  <ul className="mt-3 space-y-3 text-sm leading-relaxed text-zinc-700">
+                    {position.items.map((item) => (
+                      <li key={item.label.en} className="flex gap-3">
+                        <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-zinc-400" aria-hidden />
+                        <span>
+                          <span className="font-medium text-zinc-900">{item.label[lang]}:</span>{" "}
+                          {item.text[lang]}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </li>
+            ))}
+          </ol>
         </section>
 
         {/* Articles */}
