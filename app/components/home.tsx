@@ -184,7 +184,7 @@ export function Home({ lang }: { lang: Lang }) {
           <div className="order-first shrink-0 md:order-none">
             <div className="hero-portrait relative origin-bottom transform-gpu cursor-default transition-transform duration-500 ease-out motion-safe:hover:scale-105">
               <span
-                className="absolute inset-x-0 bottom-0 aspect-square rounded-full bg-gradient-to-b from-[#F05138]/25 to-[#F05138]/10"
+                className="absolute inset-x-0 bottom-0 aspect-square rounded-full bg-[#F05138]"
                 aria-hidden
               />
               <Image
