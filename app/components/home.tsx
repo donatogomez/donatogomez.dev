@@ -180,17 +180,17 @@ export function Home({ lang }: { lang: Lang }) {
               ))}
             </ul>
           </div>
-          {/* En móvil la foto va primero, con un fundido abajo para que no se vea
-              el corte; en escritorio, a la derecha y apoyada en el borde inferior. */}
-          <div className="order-first shrink-0 [mask-image:linear-gradient(to_bottom,black_70%,transparent)] md:order-none md:-mb-12 md:self-end md:[mask-image:none]">
+          {/* En móvil la foto va primero; en escritorio, a la derecha del texto.
+              El fundido de abajo disimula el corte del recorte. */}
+          <div className="order-first shrink-0 [mask-image:linear-gradient(to_bottom,black_70%,transparent)] md:order-none">
             <div className="transform-gpu cursor-default transition-transform duration-500 ease-out motion-safe:hover:scale-105">
               <Image
                 src="/portrait.png"
                 alt="Donato Gómez"
                 width={635}
                 height={960}
-                sizes="(min-width: 768px) 212px, 148px"
-                className="h-56 w-auto md:h-80"
+                sizes="(min-width: 768px) 191px, 148px"
+                className="h-56 w-auto md:h-72"
                 preload
                 fetchPriority="high"
               />
