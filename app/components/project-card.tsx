@@ -1,6 +1,7 @@
 import Image from "next/image";
 import type { HomeCopy, Lang } from "../content/copy";
 import type { Project } from "../content/projects";
+import { GitHubIcon } from "./icons";
 
 const actionClass =
   "inline-flex h-10 items-center justify-center rounded-lg bg-zinc-900 px-4 text-sm font-medium text-white transition-colors hover:bg-zinc-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-600 focus-visible:ring-offset-2";
@@ -44,10 +45,10 @@ export function ProjectCard({ project, lang, t }: { project: Project; lang: Lang
       </p>
 
       {project.screenshots && (
-        // En móvil no caben las tres: la tira se desliza en horizontal y llega
-        // hasta el borde de la tarjeta. tabIndex permite desplazarla con teclado.
+        // En móvil no caben las tres: la tira se desliza en horizontal dentro
+        // del margen de la tarjeta. tabIndex permite desplazarla con teclado.
         <ul
-          className="-mx-6 mt-5 flex snap-x snap-mandatory gap-3 overflow-x-auto px-6 pb-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-600 sm:mx-0 sm:justify-center sm:px-0"
+          className="mt-5 flex snap-x snap-mandatory gap-3 overflow-x-auto rounded-2xl pb-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-600 focus-visible:ring-offset-2 sm:justify-center"
           aria-label={`${t.screenshotsLabel} · ${project.name}`}
           tabIndex={0}
         >
@@ -105,7 +106,8 @@ export function ProjectCard({ project, lang, t }: { project: Project; lang: Lang
               </a>
             ))}
             {links.repo && (
-              <a href={links.repo} target="_blank" rel="noopener noreferrer" className={actionClass}>
+              <a href={links.repo} target="_blank" rel="noopener noreferrer" className={`${actionClass} gap-2`}>
+                <GitHubIcon className="h-5 w-5 shrink-0" />
                 {t.viewCode}
                 <span className="sr-only"> · {project.name}</span>
               </a>

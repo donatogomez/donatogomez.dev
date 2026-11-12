@@ -8,6 +8,8 @@ export type Article = {
   /** Fecha de publicación que muestra Medium, en formato ISO. */
   published: string;
   readingMinutes: number;
+  /** Imagen de cabecera del artículo en Medium, en `public/articles/` (WebP, 800 px de ancho). */
+  cover: string;
 };
 
 // Ordenados del más reciente al más antiguo.
@@ -21,6 +23,7 @@ export const articles: Article[] = [
     },
     published: "2026-03-18",
     readingMinutes: 5,
+    cover: "/articles/swift-not-just-ios.webp",
   },
   {
     title: "Understanding @MainActor in SwiftUI: A Practical Guide for Swift 6",
@@ -31,6 +34,7 @@ export const articles: Article[] = [
     },
     published: "2025-05-20",
     readingMinutes: 3,
+    cover: "/articles/mainactor-swiftui.webp",
   },
   {
     title: "Reactive Swift Without Combine or Rx",
@@ -41,5 +45,6 @@ export const articles: Article[] = [
     },
     published: "2025-05-13",
     readingMinutes: 4,
+    cover: "/articles/reactive-swift.webp",
   },
 ];
