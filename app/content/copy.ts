@@ -23,6 +23,8 @@ export type HomeCopy = {
   articlesLanguage: string;
   articlesReadingTime: string;
   articlesAll: string;
+  experienceHeading: string;
+  experiencePresent: string;
   aboutHeading: string;
   aboutParagraph: string;
   aboutParagraph2: string;
@@ -52,7 +54,7 @@ export const copy: Record<Lang, HomeCopy> = {
   es: {
     roleTitle: "Desarrollador iOS",
     heroTagline:
-      "4 años creando apps nativas con Swift y SwiftUI. Autor de ZonaSalsa, publicada en App Store y Google Play, con CarPlay y Siri.",
+      "Más de 3 años desarrollando apps iOS en producción con Swift y SwiftUI. Autor de ZonaSalsa, publicada en App Store y Google Play, con CarPlay y Siri.",
     viewProjects: "Ver proyectos",
     cvDownload: "Descargar CV",
     linkedin: "LinkedIn",
@@ -73,6 +75,8 @@ export const copy: Record<Lang, HomeCopy> = {
     articlesLanguage: "En inglés",
     articlesReadingTime: "min de lectura",
     articlesAll: "Todos mis artículos en Medium",
+    experienceHeading: "Trayectoria",
+    experiencePresent: "actualidad",
     aboutHeading: "Sobre mí",
     aboutParagraph:
       "Desarrollo apps nativas para el ecosistema Apple con un enfoque claro en diseño del software y mantenibilidad. Para mí, escribir código no es solo hacer que algo funcione hoy, sino dejar un sistema que otros puedan entender, extender y evolucionar.",
@@ -102,7 +106,7 @@ export const copy: Record<Lang, HomeCopy> = {
   en: {
     roleTitle: "iOS Developer",
     heroTagline:
-      "4 years building native apps with Swift and SwiftUI. Creator of ZonaSalsa, live on the App Store and Google Play, with CarPlay and Siri support.",
+      "3+ years building production iOS apps with Swift and SwiftUI. Creator of ZonaSalsa, live on the App Store and Google Play, with CarPlay and Siri support.",
     viewProjects: "View projects",
     cvDownload: "Download CV",
     linkedin: "LinkedIn",
@@ -123,6 +127,8 @@ export const copy: Record<Lang, HomeCopy> = {
     articlesLanguage: "",
     articlesReadingTime: "min read",
     articlesAll: "All my articles on Medium",
+    experienceHeading: "Experience",
+    experiencePresent: "present",
     aboutHeading: "About me",
     aboutParagraph:
       "I develop native apps for the Apple ecosystem with a clear focus on software design and maintainability. For me, writing code isn't just about making something work today—it's about leaving a system that others can understand, extend, and evolve.",
