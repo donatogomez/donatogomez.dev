@@ -181,16 +181,21 @@ export function Home({ lang }: { lang: Lang }) {
             </ul>
           </div>
           {/* En móvil la foto va primero; en escritorio, a la derecha del texto.
-              El fundido de abajo disimula el corte del recorte. */}
-          <div className="order-first shrink-0 [mask-image:linear-gradient(to_bottom,black_70%,transparent)] md:order-none">
-            <div className="transform-gpu cursor-default transition-transform duration-500 ease-out motion-safe:hover:scale-105">
+              Al pasar el ratón crecen juntos foto y círculo, desde abajo, para
+              que la máscara no corte la cabeza. */}
+          <div className="order-first shrink-0 md:order-none">
+            <div className="hero-portrait relative origin-bottom transform-gpu cursor-default transition-transform duration-500 ease-out motion-safe:hover:scale-105">
+              <span
+                className="absolute inset-x-0 bottom-0 aspect-square rounded-full bg-gradient-to-b from-[#F05138]/25 to-[#F05138]/10"
+                aria-hidden
+              />
               <Image
                 src="/portrait.png"
                 alt="Donato Gómez"
                 width={635}
                 height={960}
                 sizes="(min-width: 768px) 191px, 148px"
-                className="h-56 w-auto md:h-72"
+                className="relative mx-auto h-full w-auto motion-safe:animate-[portrait-rise_0.9s_cubic-bezier(0.22,1,0.36,1)_0.1s_both]"
                 preload
                 fetchPriority="high"
               />

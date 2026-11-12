@@ -19,6 +19,35 @@
   }
 }
 
+/* Foto del hero: círculo detrás y recorte con dos capas de máscara que se
+   suman. La de arriba deja ver todo hasta el centro del círculo (la cabeza
+   sobresale); la circular recorta el resto, así el corte recto de la foto
+   queda oculto bajo la curva. --d es el diámetro del círculo. */
+.hero-portrait {
+  --d: 188px;
+  width: var(--d);
+  height: 224px;
+  mask-image: radial-gradient(closest-side, #000 99%, transparent 100%), linear-gradient(#000, #000);
+  mask-size: var(--d) var(--d), 100% calc(100% - var(--d) / 2);
+  mask-position: bottom center, top center;
+  mask-repeat: no-repeat;
+}
+
+@media (min-width: 768px) {
+  .hero-portrait {
+    --d: 240px;
+    height: 288px;
+  }
+}
+
+/* Al cargar, la foto sube desde dentro del círculo. Solo movimiento, sin
+   opacidad, para no retrasar el pintado de la imagen principal. */
+@keyframes portrait-rise {
+  from {
+    transform: translateY(14%);
+  }
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
